@@ -1,0 +1,18 @@
+type User {
+  todos: [Todo!]
+}
+
+input CreateTodoInput {
+  id: String!
+  title: String!
+  user: String!
+}
+
+type Mutation {
+  createTodo(input: CreateTodoInput!): Todo!
+}
+
+type Todo {
+  id: ID!
+  title: String!
+}

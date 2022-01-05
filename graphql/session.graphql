@@ -1,0 +1,7 @@
+type Query {
+  session: Session!
+}
+
+type Session {
+  user: User!
+}

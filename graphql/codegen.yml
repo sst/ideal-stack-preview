@@ -1,0 +1,20 @@
+overwrite: true
+schema:
+  - graphql/*.graphql
+
+generates:
+  backend/services/apollo/types.ts:
+    config:
+      useIndexSignature: true
+      makeResolverTypeCallable: true
+      contextType: "@acme/core#Context"
+    plugins:
+      - typescript
+      - typescript-resolvers
+  backend/services/apollo/schema.ts:
+    plugins:
+      - ./backend/codegen-typedef.js
+
+hooks:
+  afterOneFileWrite:
+    - prettier --write

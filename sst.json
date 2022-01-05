@@ -1,0 +1,7 @@
+{
+  "name": "acme",
+  "region": "us-east-2",
+  "lint": false,
+  "typeCheck": true,
+  "main": "stacks/index.ts"
+}
