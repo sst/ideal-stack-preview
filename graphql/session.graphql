@@ -3,5 +3,5 @@ type Query {
 }
 
 type Session {
-  user: User!
+  currentUser: User!
 }

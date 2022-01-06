@@ -50,7 +50,7 @@ export type QueryUserArgs = {
 
 export type Session = {
   __typename?: "Session";
-  user: User;
+  currentUser: User;
 };
 
 export type Todo = {
@@ -62,7 +62,7 @@ export type Todo = {
 export type User = {
   __typename?: "User";
   id: Scalars["ID"];
-  todos?: Maybe<Array<Todo>>;
+  todos: Array<Todo>;
 };
 
 export type WithIndex<TObject> = TObject & Record<string, any>;
@@ -228,7 +228,7 @@ export type SessionResolvers<
   ContextType = Context,
   ParentType extends ResolversParentTypes["Session"] = ResolversParentTypes["Session"]
 > = ResolversObject<{
-  user?: Resolver<ResolversTypes["User"], ParentType, ContextType>;
+  currentUser?: Resolver<ResolversTypes["User"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
@@ -246,11 +246,7 @@ export type UserResolvers<
   ParentType extends ResolversParentTypes["User"] = ResolversParentTypes["User"]
 > = ResolversObject<{
   id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
-  todos?: Resolver<
-    Maybe<Array<ResolversTypes["Todo"]>>,
-    ParentType,
-    ContextType
-  >;
+  todos?: Resolver<Array<ResolversTypes["Todo"]>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 

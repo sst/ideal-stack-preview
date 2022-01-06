@@ -15,6 +15,17 @@ generates:
     plugins:
       - ./backend/codegen-typedef.js
 
+  frontend/src/data/urql.ts:
+    documents:
+      - frontend/src/data/operations.graphql
+    config:
+      withHooks: true
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-urql
+
+
 hooks:
   afterOneFileWrite:
     - prettier --write

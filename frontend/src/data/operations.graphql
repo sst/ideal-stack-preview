@@ -1,0 +1,10 @@
+query todos {
+  session {
+    currentUser {
+      todos {
+        id
+        title
+      }
+    }
+  }
+}

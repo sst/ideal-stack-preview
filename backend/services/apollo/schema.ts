@@ -17,7 +17,7 @@ export const typeDefs = gql`
     user(id: ID!): User!
   }
   type Session {
-    user: User!
+    currentUser: User!
   }
   type Todo {
     id: ID!
@@ -25,6 +25,6 @@ export const typeDefs = gql`
   }
   type User {
     id: ID!
-    todos: [Todo!]
+    todos: [Todo!]!
   }
 `;
