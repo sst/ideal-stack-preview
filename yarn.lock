@@ -5176,6 +5176,38 @@
     xstate "^4.26.1"
     zod "^3.11.6"
 
+"@serverless-stack/core@^0.56.2":
+  version "0.56.2"
+  resolved "https://registry.yarnpkg.com/@serverless-stack/core/-/core-0.56.2.tgz#a552aa12345055eec84ddaff1da595aa8b601108"
+  integrity sha512-67n9vGOn9KIHCXDED3E5eUKfFgOyejisaA3Iy0+7ybI9sdDFN49rrj/F/SQWm0YlnfDD7wak0l4CaMa1iBD/fw==
+  dependencies:
+    "@aws-sdk/client-s3" "^3.45.0"
+    "@trpc/client" "^9.16.0"
+    "@trpc/react" "^9.16.0"
+    "@trpc/server" "^9.16.0"
+    "@types/picomatch" "^2.3.0"
+    aws-cdk "1.132.0"
+    aws-sdk "^2.761.0"
+    chalk "^4.1.0"
+    chokidar "^3.5.2"
+    cross-spawn "^7.0.3"
+    dataloader "^2.0.0"
+    dendriform-immer-patch-optimiser "^2.1.0"
+    dotenv "^10.0.0"
+    dotenv-expand "^5.1.0"
+    express "^4.17.1"
+    fs-extra "^9.0.1"
+    immer "^9.0.7"
+    js-yaml "^4.1.0"
+    log4js "^6.3.0"
+    picomatch "^2.3.0"
+    remeda "^0.0.32"
+    stun "^2.1.0"
+    typescript "^4.4.3"
+    uuid "^8.3.2"
+    xstate "^4.26.1"
+    zod "^3.11.6"
+
 "@serverless-stack/nextjs-core@^0.1.9":
   version "0.1.9"
   resolved "https://registry.yarnpkg.com/@serverless-stack/nextjs-core/-/nextjs-core-0.1.9.tgz#ca480e8081df5d262ed5f61ef44584e130198e17"
@@ -5267,6 +5299,15 @@
     ts-jest "^26.1.4"
     typescript "^4.4.3"
     zip-local "^0.3.4"
+
+"@serverless-stack/static-site-env@^0.56.2":
+  version "0.56.2"
+  resolved "https://registry.yarnpkg.com/@serverless-stack/static-site-env/-/static-site-env-0.56.2.tgz#4c972dc717722671c2a2b1d8ba32f4c950b37876"
+  integrity sha512-SJ1AXu90oEgn4aaSJJGBeBeaeokLuMLIGKiGD8/tmW/QI72YYNzJNHu/mMHFokvNwl4Uxq3gmBclP39UyUaKYA==
+  dependencies:
+    "@serverless-stack/core" "^0.56.2"
+    chalk "^4.1.0"
+    yargs "^15.4.1"
 
 "@sindresorhus/is@^0.14.0":
   version "0.14.0"

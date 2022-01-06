@@ -2,7 +2,7 @@
   "name": "@acme/frontend",
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
+    "dev": "sst-env -- vite",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
@@ -12,6 +12,7 @@
     "urql": "^2.0.6"
   },
   "devDependencies": {
+    "@serverless-stack/static-site-env": "^0.56.2",
     "@types/react": "^17.0.33",
     "@types/react-dom": "^17.0.10",
     "@vitejs/plugin-react": "^1.0.7",
