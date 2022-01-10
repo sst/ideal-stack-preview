@@ -13,7 +13,7 @@ import {
   CognitoUserPool,
 } from "amazon-cognito-identity-js";
 import { Config } from "./config";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 type AuthContextType = {
   isBootstrapping: boolean;
