@@ -19,5 +19,6 @@ export default function main(app: sst.App): void {
   });
   new Frontend(app, {
     api: api.outputs,
+    auth: auth.outputs,
   });
 }
