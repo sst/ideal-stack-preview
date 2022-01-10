@@ -29,6 +29,11 @@ export type CreateTodoInput = {
   user: Scalars["String"];
 };
 
+export type Debug = {
+  __typename?: "Debug";
+  scrap: Scalars["String"];
+};
+
 export type Mutation = {
   __typename?: "Mutation";
   createTodo: Todo;
@@ -40,6 +45,7 @@ export type MutationCreateTodoArgs = {
 
 export type Query = {
   __typename?: "Query";
+  debug: Debug;
   session: Session;
   user: User;
 };
@@ -175,28 +181,38 @@ export type DirectiveResolverFn<
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = ResolversObject<{
-  Boolean: ResolverTypeWrapper<Scalars["Boolean"]>;
-  CreateTodoInput: CreateTodoInput;
-  ID: ResolverTypeWrapper<Scalars["ID"]>;
+  Boolean: ResolverTypeWrapper<Partial<Scalars["Boolean"]>>;
+  CreateTodoInput: ResolverTypeWrapper<Partial<CreateTodoInput>>;
+  Debug: ResolverTypeWrapper<Partial<Debug>>;
+  ID: ResolverTypeWrapper<Partial<Scalars["ID"]>>;
   Mutation: ResolverTypeWrapper<{}>;
   Query: ResolverTypeWrapper<{}>;
-  Session: ResolverTypeWrapper<Session>;
-  String: ResolverTypeWrapper<Scalars["String"]>;
-  Todo: ResolverTypeWrapper<Todo>;
-  User: ResolverTypeWrapper<User>;
+  Session: ResolverTypeWrapper<Partial<Session>>;
+  String: ResolverTypeWrapper<Partial<Scalars["String"]>>;
+  Todo: ResolverTypeWrapper<Partial<Todo>>;
+  User: ResolverTypeWrapper<Partial<User>>;
 }>;
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = ResolversObject<{
-  Boolean: Scalars["Boolean"];
-  CreateTodoInput: CreateTodoInput;
-  ID: Scalars["ID"];
+  Boolean: Partial<Scalars["Boolean"]>;
+  CreateTodoInput: Partial<CreateTodoInput>;
+  Debug: Partial<Debug>;
+  ID: Partial<Scalars["ID"]>;
   Mutation: {};
   Query: {};
-  Session: Session;
-  String: Scalars["String"];
-  Todo: Todo;
-  User: User;
+  Session: Partial<Session>;
+  String: Partial<Scalars["String"]>;
+  Todo: Partial<Todo>;
+  User: Partial<User>;
+}>;
+
+export type DebugResolvers<
+  ContextType = Context,
+  ParentType extends ResolversParentTypes["Debug"] = ResolversParentTypes["Debug"]
+> = ResolversObject<{
+  scrap?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
 export type MutationResolvers<
@@ -215,6 +231,7 @@ export type QueryResolvers<
   ContextType = Context,
   ParentType extends ResolversParentTypes["Query"] = ResolversParentTypes["Query"]
 > = ResolversObject<{
+  debug?: Resolver<ResolversTypes["Debug"], ParentType, ContextType>;
   session?: Resolver<ResolversTypes["Session"], ParentType, ContextType>;
   user?: Resolver<
     ResolversTypes["User"],
@@ -251,6 +268,7 @@ export type UserResolvers<
 }>;
 
 export type Resolvers<ContextType = Context> = ResolversObject<{
+  Debug?: DebugResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   Session?: SessionResolvers<ContextType>;

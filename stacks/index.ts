@@ -1,5 +1,7 @@
 import * as sst from "@serverless-stack/resources";
 import { Api } from "./Api";
+import { Auth } from "./Auth";
+import { Database } from "./Database";
 import { Frontend } from "./Frontend";
 
 export default function main(app: sst.App): void {
@@ -9,7 +11,12 @@ export default function main(app: sst.App): void {
     environment: {},
   });
 
-  const api = new Api(app);
+  const db = new Database(app);
+  const auth = new Auth(app);
+  const api = new Api(app, {
+    db: db.outputs,
+    auth: auth.outputs,
+  });
   new Frontend(app, {
     api: api.outputs,
   });

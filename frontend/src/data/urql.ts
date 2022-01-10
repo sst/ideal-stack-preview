@@ -27,6 +27,11 @@ export type CreateTodoInput = {
   user: Scalars["String"];
 };
 
+export type Debug = {
+  __typename?: "Debug";
+  scrap: Scalars["String"];
+};
+
 export type Mutation = {
   __typename?: "Mutation";
   createTodo: Todo;
@@ -38,6 +43,7 @@ export type MutationCreateTodoArgs = {
 
 export type Query = {
   __typename?: "Query";
+  debug: Debug;
   session: Session;
   user: User;
 };

@@ -9,10 +9,14 @@ export const typeDefs = gql`
     title: String!
     user: String!
   }
+  type Debug {
+    scrap: String!
+  }
   type Mutation {
     createTodo(input: CreateTodoInput!): Todo!
   }
   type Query {
+    debug: Debug!
     session: Session!
     user(id: ID!): User!
   }

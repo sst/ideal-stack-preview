@@ -1,12 +1,19 @@
 import { ApolloServer } from "apollo-server-lambda";
-import { TodoResolver } from "./todo";
-import { UserResolver } from "./user";
-import { SessionResolver } from "./session";
 import { typeDefs } from "./schema";
 import { useContext } from "@acme/core";
 import { merge } from "lodash-es";
 
-const resolvers = merge([TodoResolver, UserResolver, SessionResolver]);
+import { TodoResolver } from "./todo";
+import { UserResolver } from "./user";
+import { SessionResolver } from "./session";
+import { DebugResolver } from "./debug";
+
+const resolvers = merge([
+  TodoResolver,
+  UserResolver,
+  SessionResolver,
+  DebugResolver,
+]);
 
 const server = new ApolloServer({
   typeDefs,

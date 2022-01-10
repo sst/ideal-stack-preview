@@ -8,9 +8,11 @@ generates:
       useIndexSignature: true
       makeResolverTypeCallable: true
       contextType: "@acme/core#Context"
+      defaultMapper: Partial<{T}>
     plugins:
       - typescript
       - typescript-resolvers
+
   backend/services/apollo/schema.ts:
     plugins:
       - ./backend/codegen-typedef.js

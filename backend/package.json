@@ -8,6 +8,8 @@
   "dependencies": {
     "@types/aws-lambda": "^8.10.83",
     "apollo-server-lambda": "^3.6.1",
+    "kysely": "^0.15.3",
+    "kysely-data-api": "^0.0.7",
     "lodash-es": "^4.17.21"
   },
   "devDependencies": {

@@ -1,0 +1,7 @@
+type Query {
+  debug: Debug!
+}
+
+type Debug {
+  scrap: String!
+}

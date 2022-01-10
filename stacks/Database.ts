@@ -1,0 +1,45 @@
+import * as sst from "@serverless-stack/resources";
+import * as rds from "@aws-cdk/aws-rds";
+import * as ec2 from "@aws-cdk/aws-ec2";
+
+export class Database extends sst.Stack {
+  public readonly outputs: {
+    cluster: rds.ServerlessCluster;
+  };
+
+  constructor(scope: sst.App) {
+    super(scope, "database");
+
+    // Create VPC solely for RDS as it is required. Nothing should be using this.
+    const vpc = new ec2.Vpc(this, "vpc", {
+      natGateways: 0,
+      subnetConfiguration: [
+        {
+          cidrMask: 24,
+          name: "public",
+          subnetType: ec2.SubnetType.PUBLIC,
+        },
+        {
+          cidrMask: 28,
+          name: "rds",
+          subnetType: ec2.SubnetType.PRIVATE_ISOLATED,
+        },
+      ],
+    });
+
+    const cluster = new rds.ServerlessCluster(this, "cluster", {
+      vpc,
+      engine: rds.DatabaseClusterEngine.auroraPostgres({
+        version: rds.AuroraPostgresEngineVersion.VER_10_14,
+      }),
+      enableDataApi: true,
+      vpcSubnets: {
+        subnetType: ec2.SubnetType.PRIVATE_ISOLATED,
+      },
+    });
+
+    this.outputs = {
+      cluster,
+    };
+  }
+}
