@@ -136,7 +136,7 @@ export function NeedsAuth(
 ) {
   const auth = useAuth();
 
-  if (auth.isBootstrapping) return "Loading...";
+  if (auth.isBootstrapping) return <span>Loading...</span>;
   if (!auth.isAuthenticated) return <Navigate to={props.redirectTo} />;
 
   return <>{props.children}</>;
