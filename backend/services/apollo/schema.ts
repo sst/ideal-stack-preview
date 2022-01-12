@@ -13,6 +13,7 @@ export const typeDefs = gql`
   }
   type Mutation {
     createTodo(input: CreateTodoInput!): Todo!
+    removeTodo(id: String!): Todo
     upload(name: String!, type: String!): String!
   }
   type Query {

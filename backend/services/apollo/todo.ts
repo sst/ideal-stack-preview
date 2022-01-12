@@ -5,6 +5,9 @@ export const TodoResolver: Resolvers<Context> = {
   Mutation: {
     createTodo: async (_parent, args, ctx) =>
       await Todo.create(ctx, args.input),
+    removeTodo: async (_parent, args, ctx) => {
+      return await Todo.remove(ctx, args.id);
+    },
   },
   User: {
     todos: async (parent, _args, ctx) => {

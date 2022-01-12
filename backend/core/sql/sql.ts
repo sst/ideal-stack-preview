@@ -7,7 +7,7 @@ type TodoRow = {
   id: string;
   title: string;
   done: boolean;
-  authorId: string;
+  author_id: string;
 };
 
 export type Database = {

@@ -20,6 +20,16 @@ export async function create(ctx: Context, opts: CreateOpts) {
   return result;
 }
 
+export async function remove(ctx: Context, id: string) {
+  const user = ctx.assertAuthenticated();
+  const result = await SQL.DB.deleteFrom("todos")
+    .where("id", "=", id)
+    .where("author_id", "=", user.id)
+    .returningAll()
+    .executeTakeFirstOrThrow();
+  return result;
+}
+
 type ForUserOpts = {
   userId: string;
 };

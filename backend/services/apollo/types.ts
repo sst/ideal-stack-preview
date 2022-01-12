@@ -37,11 +37,16 @@ export type Debug = {
 export type Mutation = {
   __typename?: "Mutation";
   createTodo: Todo;
+  removeTodo?: Maybe<Todo>;
   upload: Scalars["String"];
 };
 
 export type MutationCreateTodoArgs = {
   input: CreateTodoInput;
+};
+
+export type MutationRemoveTodoArgs = {
+  id: Scalars["String"];
 };
 
 export type MutationUploadArgs = {
@@ -230,6 +235,12 @@ export type MutationResolvers<
     ParentType,
     ContextType,
     RequireFields<MutationCreateTodoArgs, "input">
+  >;
+  removeTodo?: Resolver<
+    Maybe<ResolversTypes["Todo"]>,
+    ParentType,
+    ContextType,
+    RequireFields<MutationRemoveTodoArgs, "id">
   >;
   upload?: Resolver<
     ResolversTypes["String"],

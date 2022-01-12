@@ -27,7 +27,6 @@ export function CognitoProvider(props: PropsWithChildren<{ value: Cognito }>) {
     );
     props.value.init()?.catch();
   }, []);
-  console.log("Rendering provider", props.value);
 
   return (
     <CognitoContext.Provider value={auth}>

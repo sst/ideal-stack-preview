@@ -9,6 +9,7 @@ input CreateTodoInput {
 
 type Mutation {
   createTodo(input: CreateTodoInput!): Todo!
+  removeTodo(id: String!): Todo
 }
 
 type Todo {

@@ -12,13 +12,6 @@ const cognito = new Cognito({
   UserPoolId: Config.COGNITO_USER_POOL_ID,
   ClientId: Config.COGNITO_CLIENT_ID,
 });
-cognito.onChange((auth) =>
-  console.log({
-    initializing: auth.isInitializing,
-    session: auth.session,
-    user: auth.user,
-  })
-);
 
 const client = urql.createClient({
   url: Config.APOLLO_URL,

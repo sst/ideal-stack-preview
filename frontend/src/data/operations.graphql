@@ -9,6 +9,12 @@ query Todos {
   }
 }
 
+mutation RemoveTodo($id: String!) {
+    id
+    title
+  }
+}
+
 mutation CreateTodo($id: String!, $title: String!) {
   createTodo(input: { id: $id, title: $title }) {
     id

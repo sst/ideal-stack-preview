@@ -3,12 +3,14 @@ import {
   useTodosQuery,
   useCreateTodoMutation,
   useUploadMutation,
+  useRemoveTodoMutation,
 } from "@app/data/urql";
 
 export function Todos() {
   const cognito = useCognito();
   const [todos] = useTodosQuery();
   const [, create] = useCreateTodoMutation();
+  const [, remove] = useRemoveTodoMutation();
   const [, upload] = useUploadMutation();
 
   if (!todos.data) return <div>Loading...</div>;
@@ -42,7 +44,14 @@ export function Todos() {
       />
       <div>
         {todos.data.session.currentUser.todos.map((todo) => (
-          <div key={todo.id}>
+          <div
+            key={todo.id}
+            onClick={() =>
+              remove({
+                id: todo.id,
+              })
+            }
+          >
             <div>{todo.title}</div>
           </div>
         ))}

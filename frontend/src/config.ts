@@ -5,6 +5,7 @@ function get(key: string) {
   }
   return value as string;
 }
+
 export const Config = {
   APOLLO_URL: get("APOLLO_URL"),
   COGNITO_USER_POOL_ID: get("COGNITO_USER_POOL_ID"),

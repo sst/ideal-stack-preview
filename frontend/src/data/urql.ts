@@ -34,11 +34,16 @@ export type Debug = {
 export type Mutation = {
   __typename?: "Mutation";
   createTodo: Todo;
+  removeTodo?: Maybe<Todo>;
   upload: Scalars["String"];
 };
 
 export type MutationCreateTodoArgs = {
   input: CreateTodoInput;
+};
+
+export type MutationRemoveTodoArgs = {
+  id: Scalars["String"];
 };
 
 export type MutationUploadArgs = {
@@ -87,6 +92,18 @@ export type TodosQuery = {
   };
 };
 
+export type RemoveTodoMutationVariables = Exact<{
+  id: Scalars["String"];
+}>;
+
+export type RemoveTodoMutation = {
+  __typename?: "Mutation";
+  removeTodo?:
+    | { __typename?: "Todo"; id: string; title: string }
+    | null
+    | undefined;
+};
+
 export type CreateTodoMutationVariables = Exact<{
   id: Scalars["String"];
   title: Scalars["String"];
@@ -121,6 +138,20 @@ export function useTodosQuery(
   options: Omit<Urql.UseQueryArgs<TodosQueryVariables>, "query"> = {}
 ) {
   return Urql.useQuery<TodosQuery>({ query: TodosDocument, ...options });
+}
+export const RemoveTodoDocument = gql`
+  mutation RemoveTodo($id: String!) {
+    removeTodo(id: $id) {
+      id
+      title
+    }
+  }
+`;
+
+export function useRemoveTodoMutation() {
+  return Urql.useMutation<RemoveTodoMutation, RemoveTodoMutationVariables>(
+    RemoveTodoDocument
+  );
 }
 export const CreateTodoDocument = gql`
   mutation CreateTodo($id: String!, $title: String!) {
