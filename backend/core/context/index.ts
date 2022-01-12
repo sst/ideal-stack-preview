@@ -1,4 +1,4 @@
-type Actor = UserActor;
+type Actor = UserActor | PublicActor;
 
 type UserActor = {
   type: "user";
@@ -7,9 +7,19 @@ type UserActor = {
   };
 };
 
+type PublicActor = {
+  type: "public";
+};
+
 export function useContext(actor: Actor) {
   return {
     actor,
+    assertAuthenticated() {
+      if (actor.type === "public") {
+        throw new Error("Not authenticated");
+      }
+      return actor.properties;
+    },
   };
 }
 

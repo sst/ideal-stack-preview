@@ -8,10 +8,12 @@ generates:
       useIndexSignature: true
       makeResolverTypeCallable: true
       contextType: "@acme/core#Context"
-      defaultMapper: Partial<{T}>
+      defaultMapper: DeepPartial<{T}>
     plugins:
       - typescript
       - typescript-resolvers
+      - add:
+          content: "import { DeepPartial } from 'utility-types';"
 
   backend/services/apollo/schema.ts:
     plugins:

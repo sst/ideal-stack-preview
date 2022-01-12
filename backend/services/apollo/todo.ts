@@ -7,7 +7,12 @@ export const TodoResolver: Resolvers<Context> = {
       await Todo.create(ctx, args.input),
   },
   User: {
-    todos: async (parent, _args, ctx) =>
-      Todo.forUser(ctx, { userId: parent.id }),
+    todos: async (parent, _args, ctx) => {
+      const results = await Todo.forUser(ctx, { userId: parent.id! });
+      return results.map((r) => ({
+        id: r.id,
+        title: r.title,
+      }));
+    },
   },
 };

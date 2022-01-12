@@ -5,7 +5,6 @@ type User {
 input CreateTodoInput {
   id: String!
   title: String!
-  user: String!
 }
 
 type Mutation {

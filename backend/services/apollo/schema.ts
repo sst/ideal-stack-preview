@@ -7,13 +7,13 @@ export const typeDefs = gql`
   input CreateTodoInput {
     id: String!
     title: String!
-    user: String!
   }
   type Debug {
     scrap: String!
   }
   type Mutation {
     createTodo(input: CreateTodoInput!): Todo!
+    upload(name: String!, type: String!): String!
   }
   type Query {
     debug: Debug!

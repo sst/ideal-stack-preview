@@ -1,6 +1,5 @@
 import {
   createContext,
-  Dispatch,
   PropsWithChildren,
   useContext,
   useEffect,
@@ -11,69 +10,109 @@ import {
   CognitoUser,
   CognitoUserAttribute,
   CognitoUserPool,
+  CognitoUserSession,
+  ISignUpResult,
 } from "amazon-cognito-identity-js";
-import { Config } from "./config";
-import { Navigate } from "react-router-dom";
 
-type AuthContextType = {
-  isBootstrapping: boolean;
-  isAuthenticated: boolean;
-};
+const CognitoContext = createContext<{ cognito: Cognito }>(undefined as any);
 
-const AuthContext = createContext<[AuthContextType, Dispatch<AuthContextType>]>(
-  [] as any
-);
-
-export function AuthProvider(props: PropsWithChildren<{}>) {
-  const [auth, setAuth] = useState<AuthContextType>({
-    isBootstrapping: true,
-    isAuthenticated: false,
-  });
+export function CognitoProvider(props: PropsWithChildren<{ value: Cognito }>) {
+  const [auth, setAuth] = useState({ cognito: props.value });
 
   useEffect(() => {
-    const user = userPool.getCurrentUser();
-    if (!user) {
+    props.value.onChange((cognito) =>
       setAuth({
-        ...auth,
-        isBootstrapping: false,
-      });
-      return;
-    }
-    user.getSession((err: Error, session: any) => {
-      if (!err) {
-        localStorage.setItem("token", session.getIdToken().getJwtToken());
-        setAuth({
-          ...auth,
-          isBootstrapping: false,
-        });
-        return;
-      }
-      setAuth({
-        ...auth,
-        isBootstrapping: false,
-      });
-    });
+        cognito,
+      })
+    );
+    props.value.init()?.catch();
   }, []);
+  console.log("Rendering provider", props.value);
 
   return (
-    <AuthContext.Provider value={[auth, setAuth]}>
+    <CognitoContext.Provider value={auth}>
       {props.children}
-    </AuthContext.Provider>
+    </CognitoContext.Provider>
   );
 }
 
-const userPool = new CognitoUserPool({
-  UserPoolId: Config.COGNITO_USER_POOL_ID,
-  ClientId: Config.COGNITO_CLIENT_ID,
-});
+type CognitoOpts = {
+  UserPoolId: string;
+  ClientId: string;
+};
 
-export function useAuth() {
-  const [authContext, setAuthContext] = useContext(AuthContext);
+export class Cognito {
+  public readonly pool: CognitoUserPool;
+  private callbacks: ((cognito: Cognito) => void)[] = [];
 
-  function login(email: string, password: string) {
+  private _session?: CognitoUserSession;
+  private _isInitializing = true;
+
+  public get isInitializing() {
+    return this._isInitializing;
+  }
+
+  private set isInitializing(val: boolean) {
+    this._isInitializing = val;
+    this.trigger();
+  }
+
+  get session() {
+    return this._session;
+  }
+
+  private set session(session: CognitoUserSession | undefined) {
+    this._session = session;
+    this.trigger();
+  }
+
+  get user() {
+    return this.pool.getCurrentUser();
+  }
+
+  constructor(opts: CognitoOpts) {
+    this.pool = new CognitoUserPool({
+      UserPoolId: opts.UserPoolId,
+      ClientId: opts.ClientId,
+    });
+  }
+
+  public onChange(cb: (cognito: Cognito) => void) {
+    this.callbacks.push(cb);
+  }
+
+  private trigger() {
+    for (let cb of this.callbacks) {
+      cb(this);
+    }
+  }
+
+  public init() {
+    if (!this.user) {
+      this.isInitializing = false;
+      return Promise.resolve(undefined);
+    }
+    return new Promise<CognitoUserSession | undefined>((resolve) => {
+      this.user!.getSession(
+        (err: Error | null, session: CognitoUserSession) => {
+          if (err) {
+            this.user!.signOut();
+            resolve(undefined);
+            this.isInitializing = false;
+            return;
+          }
+          this.session = session;
+          resolve(session);
+          this.isInitializing = false;
+        }
+      );
+    });
+  }
+
+  public async login(email: string, password: string) {
     const user = new CognitoUser({
       Username: email,
-      Pool: userPool,
+      Pool: this.pool,
     });
 
     const authDetails = new AuthenticationDetails({
@@ -84,12 +123,8 @@ export function useAuth() {
     return new Promise((resolve, reject) => {
       user.authenticateUser(authDetails, {
         onSuccess: (result) => {
-          const token = result.getAccessToken().getJwtToken();
-          localStorage.setItem("token", token);
-          setAuthContext({
-            ...authContext,
-            isAuthenticated: true,
-          });
+          this.session = result;
+          this.trigger();
           resolve(result);
         },
         onFailure: (err) => {
@@ -99,45 +134,69 @@ export function useAuth() {
     });
   }
 
-  function register(email: string, password: string) {
-    return new Promise<void>((resolve, reject) => {
-      userPool.signUp(
+  public async register(
+    email: string,
+    password: string,
+    attributes: CognitoUserAttribute[] = []
+  ) {
+    return new Promise<ISignUpResult>((resolve, reject) => {
+      this.pool.signUp(
         email,
         password,
         [
+          ...attributes,
           new CognitoUserAttribute({
             Name: "email",
             Value: email,
           }),
         ],
         [],
-        (err) => {
+        (err, resp) => {
           if (err) {
             reject(err);
             return;
           }
-          resolve();
+          this.trigger();
+          resolve(resp!);
         }
       );
     });
   }
 
-  return {
-    register,
-    login,
-    ...authContext,
-  };
+  public async confirm(username: string, code: string) {
+    const user = new CognitoUser({
+      Username: username,
+      Pool: this.pool,
+    });
+    return new Promise((resolve, reject) => {
+      user.confirmRegistration(code, true, (err, result) => {
+        if (err) {
+          reject(err);
+          return;
+        }
+        resolve(result);
+      });
+    });
+  }
+
+  public async resend(username: string) {
+    const user = new CognitoUser({
+      Username: username,
+      Pool: this.pool,
+    });
+    return new Promise((resolve, reject) => {
+      user.resendConfirmationCode((err, result) => {
+        if (err) {
+          reject(err);
+          return;
+        }
+        resolve(result);
+      });
+    });
+  }
 }
 
-export function NeedsAuth(
-  props: React.PropsWithChildren<{
-    redirectTo: string;
-  }>
-) {
-  const auth = useAuth();
-
-  if (auth.isBootstrapping) return <span>Loading...</span>;
-  if (!auth.isAuthenticated) return <Navigate to={props.redirectTo} />;
-
-  return <>{props.children}</>;
+export function useCognito() {
+  const auth = useContext(CognitoContext);
+  return auth.cognito;
 }

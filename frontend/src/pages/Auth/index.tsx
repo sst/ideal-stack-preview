@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import { Confirm } from "./Confirm";
 import { Login } from "./Login";
 import { Register } from "./Register";
 
@@ -9,6 +10,7 @@ export function Auth() {
       <Routes>
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
+        <Route path="confirm" element={<Confirm />} />
       </Routes>
     </div>
   );

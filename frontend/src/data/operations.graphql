@@ -1,4 +1,4 @@
-query todos {
+query Todos {
   session {
     currentUser {
       todos {
@@ -7,4 +7,15 @@ query todos {
       }
     }
   }
+}
+
+mutation CreateTodo($id: String!, $title: String!) {
+  createTodo(input: { id: $id, title: $title }) {
+    id
+    title
+  }
+}
+
+mutation Upload($name: String!, $type: String!) {
+  upload(name: $name, type: $type)
 }

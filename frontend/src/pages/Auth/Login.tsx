@@ -1,12 +1,28 @@
-import { useAuth } from "@app/auth";
+import { useCognito } from "@app/auth";
+import { useState } from "react";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 
 export function Login() {
-  const auth = useAuth();
+  const auth = useCognito();
+  const nav = useNavigate();
+  const [error, errorSet] = useState<string>("");
+  const [params] = useSearchParams();
+  const email = params.get("email")!;
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const fd = new FormData(event.currentTarget);
-    await auth.login(fd.get("email") as string, fd.get("password") as string);
+    const email = fd.get("email") as string;
+    await auth
+      .login(email, fd.get("password") as string)
+      .then(() => nav("/todos"))
+      .catch((err) => {
+        if (err.name === "UserNotConfirmedException") {
+          nav("/auth/confirm?email=" + email);
+          return;
+        }
+        errorSet(err.message);
+      });
   }
 
   return (
@@ -15,7 +31,7 @@ export function Login() {
       <form onSubmit={handleSubmit}>
         <div>
           <label>
-            Email: <input type="text" name="email" />
+            Email: <input defaultValue={email} type="text" name="email" />
           </label>
         </div>
         <div>
@@ -23,8 +39,10 @@ export function Login() {
             Password: <input type="password" name="password" />
           </label>
         </div>
+        {error && <div>{error}</div>}
         <button type="submit">Login</button>
       </form>
+      <Link to="/auth/register">Register</Link>
     </div>
   );
 }

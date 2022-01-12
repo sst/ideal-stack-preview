@@ -6,15 +6,21 @@
     "test": "jest"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.46.0",
+    "@aws-sdk/s3-request-presigner": "^3.46.0",
     "@types/aws-lambda": "^8.10.83",
     "apollo-server-lambda": "^3.6.1",
-    "kysely": "^0.15.3",
+    "aws-jwt-verify": "^2.0.0",
+    "kysely": "^0.16.5",
     "kysely-data-api": "^0.0.7",
-    "lodash-es": "^4.17.21"
+    "lodash-es": "^4.17.21",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@types/lodash-es": "^4.17.5",
+    "@types/uuid": "^8.3.4",
     "esbuild-runner": "^2.2.1",
-    "jest": "^27.2.0"
+    "jest": "^27.2.0",
+    "utility-types": "^3.10.0"
   }
 }

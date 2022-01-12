@@ -3,7 +3,16 @@ import { DataApiDialect } from "kysely-data-api";
 import { config } from "../config";
 import RDSDataService from "aws-sdk/clients/rdsdataservice";
 
-export type Database = {};
+type TodoRow = {
+  id: string;
+  title: string;
+  done: boolean;
+  authorId: string;
+};
+
+export type Database = {
+  todos: TodoRow;
+};
 
 export const DB = new Kysely<Database>({
   dialect: new DataApiDialect({

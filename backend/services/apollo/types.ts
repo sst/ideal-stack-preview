@@ -1,5 +1,6 @@
 import { GraphQLResolveInfo } from "graphql";
 import { Context } from "@acme/core";
+import { DeepPartial } from "utility-types";
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = {
@@ -26,7 +27,6 @@ export type Scalars = {
 export type CreateTodoInput = {
   id: Scalars["String"];
   title: Scalars["String"];
-  user: Scalars["String"];
 };
 
 export type Debug = {
@@ -37,10 +37,16 @@ export type Debug = {
 export type Mutation = {
   __typename?: "Mutation";
   createTodo: Todo;
+  upload: Scalars["String"];
 };
 
 export type MutationCreateTodoArgs = {
   input: CreateTodoInput;
+};
+
+export type MutationUploadArgs = {
+  name: Scalars["String"];
+  type: Scalars["String"];
 };
 
 export type Query = {
@@ -181,30 +187,30 @@ export type DirectiveResolverFn<
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = ResolversObject<{
-  Boolean: ResolverTypeWrapper<Partial<Scalars["Boolean"]>>;
-  CreateTodoInput: ResolverTypeWrapper<Partial<CreateTodoInput>>;
-  Debug: ResolverTypeWrapper<Partial<Debug>>;
-  ID: ResolverTypeWrapper<Partial<Scalars["ID"]>>;
+  Boolean: ResolverTypeWrapper<DeepPartial<Scalars["Boolean"]>>;
+  CreateTodoInput: ResolverTypeWrapper<DeepPartial<CreateTodoInput>>;
+  Debug: ResolverTypeWrapper<DeepPartial<Debug>>;
+  ID: ResolverTypeWrapper<DeepPartial<Scalars["ID"]>>;
   Mutation: ResolverTypeWrapper<{}>;
   Query: ResolverTypeWrapper<{}>;
-  Session: ResolverTypeWrapper<Partial<Session>>;
-  String: ResolverTypeWrapper<Partial<Scalars["String"]>>;
-  Todo: ResolverTypeWrapper<Partial<Todo>>;
-  User: ResolverTypeWrapper<Partial<User>>;
+  Session: ResolverTypeWrapper<DeepPartial<Session>>;
+  String: ResolverTypeWrapper<DeepPartial<Scalars["String"]>>;
+  Todo: ResolverTypeWrapper<DeepPartial<Todo>>;
+  User: ResolverTypeWrapper<DeepPartial<User>>;
 }>;
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = ResolversObject<{
-  Boolean: Partial<Scalars["Boolean"]>;
-  CreateTodoInput: Partial<CreateTodoInput>;
-  Debug: Partial<Debug>;
-  ID: Partial<Scalars["ID"]>;
+  Boolean: DeepPartial<Scalars["Boolean"]>;
+  CreateTodoInput: DeepPartial<CreateTodoInput>;
+  Debug: DeepPartial<Debug>;
+  ID: DeepPartial<Scalars["ID"]>;
   Mutation: {};
   Query: {};
-  Session: Partial<Session>;
-  String: Partial<Scalars["String"]>;
-  Todo: Partial<Todo>;
-  User: Partial<User>;
+  Session: DeepPartial<Session>;
+  String: DeepPartial<Scalars["String"]>;
+  Todo: DeepPartial<Todo>;
+  User: DeepPartial<User>;
 }>;
 
 export type DebugResolvers<
@@ -224,6 +230,12 @@ export type MutationResolvers<
     ParentType,
     ContextType,
     RequireFields<MutationCreateTodoArgs, "input">
+  >;
+  upload?: Resolver<
+    ResolversTypes["String"],
+    ParentType,
+    ContextType,
+    RequireFields<MutationUploadArgs, "name" | "type">
   >;
 }>;
 

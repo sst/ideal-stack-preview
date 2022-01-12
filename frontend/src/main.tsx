@@ -3,15 +3,27 @@ import ReactDOM from "react-dom";
 
 import * as urql from "urql";
 import { Config } from "./config";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { AuthProvider, NeedsAuth } from "./auth";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { Cognito, CognitoProvider, NeedsAuth, useCognito } from "./auth";
 import { Auth } from "./pages/Auth";
 import { Todos } from "./pages/Todos";
+
+const cognito = new Cognito({
+  UserPoolId: Config.COGNITO_USER_POOL_ID,
+  ClientId: Config.COGNITO_CLIENT_ID,
+});
+cognito.onChange((auth) =>
+  console.log({
+    initializing: auth.isInitializing,
+    session: auth.session,
+    user: auth.user,
+  })
+);
 
 const client = urql.createClient({
   url: Config.APOLLO_URL,
   fetchOptions: () => {
-    const token = localStorage.getItem("token");
+    const token = cognito.session?.getAccessToken().getJwtToken();
     return {
       headers: { authorization: token ? `Bearer ${token}` : "" },
     };
@@ -20,16 +32,20 @@ const client = urql.createClient({
 
 ReactDOM.render(
   <React.StrictMode>
-    <AuthProvider>
-      <urql.Provider value={client}>
+    <urql.Provider value={client}>
+      <CognitoProvider value={cognito}>
         <App />
-      </urql.Provider>
-    </AuthProvider>
+      </CognitoProvider>
+    </urql.Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );
 
 function App() {
+  console.log("Rendering app");
+  const auth = useCognito();
+  if (auth.isInitializing) return <span>Checking auth...</span>;
+
   return (
     <BrowserRouter>
       <Routes>
@@ -41,11 +57,11 @@ function App() {
 }
 
 function Authenticated() {
+  const auth = useCognito();
+  if (!auth.session) return <Navigate to="/auth/login" />;
   return (
-    <NeedsAuth redirectTo="/auth/login">
-      <Routes>
-        <Route path="/todos" element={<Todos />} />
-      </Routes>
-    </NeedsAuth>
+    <Routes>
+      <Route path="/todos" element={<Todos />} />
+    </Routes>
   );
 }

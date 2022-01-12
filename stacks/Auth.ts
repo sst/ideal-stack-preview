@@ -13,9 +13,6 @@ export class Auth extends sst.Stack {
           signInAliases: {
             email: true,
           },
-          autoVerify: {
-            email: true,
-          },
           passwordPolicy: {
             requireDigits: false,
             requireSymbols: false,

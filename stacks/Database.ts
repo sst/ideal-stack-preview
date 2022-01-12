@@ -1,6 +1,7 @@
 import * as sst from "@serverless-stack/resources";
 import * as rds from "@aws-cdk/aws-rds";
 import * as ec2 from "@aws-cdk/aws-ec2";
+import { Duration } from "@aws-cdk/core";
 
 export class Database extends sst.Stack {
   public readonly outputs: {
@@ -33,6 +34,9 @@ export class Database extends sst.Stack {
         version: rds.AuroraPostgresEngineVersion.VER_10_14,
       }),
       enableDataApi: true,
+      scaling: {
+        autoPause: Duration.minutes(15),
+      },
       vpcSubnets: {
         subnetType: ec2.SubnetType.PRIVATE_ISOLATED,
       },

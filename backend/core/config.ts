@@ -3,7 +3,8 @@ type Keys =
   | "RDS_ARN"
   | "RDS_DATABASE"
   | "COGNITO_USER_POOL_ID"
-  | "COGNITO_CLIENT_ID";
+  | "COGNITO_CLIENT_ID"
+  | "BUCKET";
 
 export function config(key: Keys) {
   const value = process.env[key];
