@@ -17,7 +17,6 @@ export const UploadResolver: Resolvers<Context> = {
         ACL: "public-read",
       });
       const url = await getSignedUrl(s3, cmd);
-
       return url;
     },
   },

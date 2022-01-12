@@ -12,7 +12,7 @@
     "apollo-server-lambda": "^3.6.1",
     "aws-jwt-verify": "^2.0.0",
     "kysely": "^0.16.5",
-    "kysely-data-api": "^0.0.7",
+    "kysely-data-api": "^0.0.8",
     "lodash-es": "^4.17.21",
     "uuid": "^8.3.2"
   },

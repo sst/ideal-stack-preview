@@ -42,6 +42,24 @@ export class Database extends sst.Stack {
       },
     });
 
+    const migrator = new sst.Function(this, "migrator", {
+      handler: "services/migrator/migrator.handler",
+      bundle: {
+        copyFiles: [
+          {
+            from: "./backend/migrations",
+          },
+        ],
+      },
+      environment: {
+        RDS_SECRET: cluster.secret!.secretArn,
+        RDS_ARN: cluster.clusterArn,
+        RDS_DATABASE: "acme",
+      },
+    });
+    cluster.secret!.grantRead(migrator);
+    cluster.grantDataApiAccess(migrator);
+
     this.outputs = {
       cluster,
     };

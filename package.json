@@ -7,7 +7,7 @@
     "frontend"
   ],
   "scripts": {
-    "sst:start": "AWS_SDK_LOAD_CONFIG=1 sst start",
+    "sst:start": "NODE_OPTIONS=--enable-source-maps AWS_SDK_LOAD_CONFIG=1 sst start",
     "gql:gen": "graphql-codegen -c ./graphql/codegen.yml"
   },
   "devDependencies": {
