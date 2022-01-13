@@ -28,8 +28,3 @@ generates:
       - typescript
       - typescript-operations
       - typescript-urql
-
-
-hooks:
-  afterOneFileWrite:
-    - prettier --write

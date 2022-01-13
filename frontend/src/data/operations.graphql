@@ -10,6 +10,7 @@ query Todos {
 }
 
 mutation RemoveTodo($id: String!) {
+  removeTodo(id: $id) {
     id
     title
   }
