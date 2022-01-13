@@ -30,14 +30,16 @@ class ApolloServerLambda extends ApolloServerBase<ApolloContext> {
       await this.ensureStarted();
 
       if (event.rawPath === "/" && event.requestContext.http.method === "GET") {
-        const landing = this.getLandingPage()!;
-        return {
-          statusCode: 200,
-          headers: {
-            "Content-Type": "text/html",
-          },
-          body: landing.html,
-        };
+        const landing = this.getLandingPage();
+        if (landing) {
+          return {
+            statusCode: 200,
+            headers: {
+              "Content-Type": "text/html",
+            },
+            body: landing.html,
+          };
+        }
       }
 
       const json = event.body
