@@ -11,12 +11,14 @@
     "@types/aws-lambda": "^8.10.83",
     "apollo-server-lambda": "^3.6.1",
     "aws-jwt-verify": "^2.0.0",
+    "fetch-headers": "^3.0.1",
     "kysely": "^0.16.6",
     "kysely-data-api": "^0.0.9",
     "lodash-es": "^4.17.21",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "@types/aws-lambda": "^8.10.89",
     "@types/lodash-es": "^4.17.5",
     "@types/uuid": "^8.3.4",
     "esbuild-runner": "^2.2.1",

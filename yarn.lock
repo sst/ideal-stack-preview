@@ -6212,15 +6212,10 @@
   dependencies:
     "@types/node" "*"
 
-"@types/aws-lambda@^8.10.76":
+"@types/aws-lambda@^8.10.76", "@types/aws-lambda@^8.10.83":
   version "8.10.89"
   resolved "https://registry.yarnpkg.com/@types/aws-lambda/-/aws-lambda-8.10.89.tgz#22617ecc1eef9571abebb50c947553362da6051b"
   integrity sha512-jwtSuEZj4rY4R2pAEOXi+RutS8RWbwMzoGlRVukdyOpnfqA/XPkAf8QoGWmg4o/UaNpQ8Mj0Xhkp5SZ1t/Zq4Q==
-
-"@types/aws-lambda@^8.10.83":
-  version "8.10.84"
-  resolved "https://registry.yarnpkg.com/@types/aws-lambda/-/aws-lambda-8.10.84.tgz#b1f391ceeb6908b28d8416d93f27afe8d1348d4e"
-  integrity sha512-5V78eLtmN0d4RA14hKDwcsMQRl3JotQJlhGFDBo/jdE2TyDFRaYwB/UmMUC4SzhSvRGn+YMkh7jGPnXi8COAng==
 
 "@types/babel__core@^7.0.0", "@types/babel__core@^7.1.7":
   version "7.1.15"
@@ -10074,6 +10069,11 @@ fbjs@^3.0.0:
     promise "^7.1.1"
     setimmediate "^1.0.5"
     ua-parser-js "^0.7.30"
+
+fetch-headers@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/fetch-headers/-/fetch-headers-3.0.1.tgz#3609148b601f36613b108f449cc3e03a77917b5f"
+  integrity sha512-Kq+NyED/wLgT29St7aW47gAWg8EmmE5QmhwQ5RmPRULYLqpglA7Kc/ZnbqXu2vhH6mw1koikew2g94WiHLPmpA==
 
 figures@^1.7.0:
   version "1.7.0"

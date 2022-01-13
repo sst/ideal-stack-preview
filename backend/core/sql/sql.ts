@@ -6,7 +6,6 @@ import RDSDataService from "aws-sdk/clients/rdsdataservice";
 type TodoRow = {
   id: string;
   title: string;
-  done: boolean;
   author_id: string;
 };
 

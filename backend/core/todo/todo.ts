@@ -11,7 +11,6 @@ export async function create(ctx: Context, opts: CreateOpts) {
   const result = await SQL.DB.insertInto("todos")
     .values({
       id: opts.id,
-      done: false,
       title: opts.title,
       author_id: user.id,
     })

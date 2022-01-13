@@ -26,6 +26,7 @@ export class Api extends sst.Stack {
 
     const apollo = new sst.ApolloApi(this, "apollo", {
       server: "services/apollo/apollo.handler",
+      defaultPayloadFormatVersion: sst.ApiPayloadFormatVersion.V2,
       defaultFunctionProps: {
         permissions: [bucket],
         environment: {
