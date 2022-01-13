@@ -12580,15 +12580,15 @@ kleur@^3.0.3:
   resolved "https://registry.yarnpkg.com/kleur/-/kleur-3.0.3.tgz#a79c9ecc86ee1ce3fa6206d1216c501f147fc07e"
   integrity sha512-eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w==
 
-kysely-data-api@^0.0.8:
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/kysely-data-api/-/kysely-data-api-0.0.8.tgz#db65db295ea16f3941a2920153d520a3aed5abc1"
-  integrity sha512-hDomsubcSqecoqX2i6HR7ICWSbmi8r+GASBh7GljNTpDnQI+tfJwgxfcM557HB17leSMFnF0/CgTRJM7EkXScA==
+kysely-data-api@^0.0.9:
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/kysely-data-api/-/kysely-data-api-0.0.9.tgz#11782b937491ce63a02683d1fe6781b26933ff1c"
+  integrity sha512-kpNV3BglE0yqkKJa4D5C7U3aOvWADZJ6UXEbFuM1xMZMzwaa878yIS0baWIt1gfsWEx5d9aNefnW5rhzC+2cKQ==
 
-kysely@^0.16.5:
-  version "0.16.5"
-  resolved "https://registry.yarnpkg.com/kysely/-/kysely-0.16.5.tgz#e163040352b8c6f5e6f93f3f82b633faa247ccc2"
-  integrity sha512-rzjbUZ6X17x+gTcY0KdsijkmyF4yGvNeEjJ6c1ARG/8cUMMAU69KjUBKRdj3YhxzLXvr+yct/kAIPOw+F/kF0A==
+kysely@^0.16.6:
+  version "0.16.6"
+  resolved "https://registry.yarnpkg.com/kysely/-/kysely-0.16.6.tgz#d8cc2a1bbcbd7969d0af0febdcd4657986221347"
+  integrity sha512-m9s3S6DS+KKgnmVrxyfxLtD1kdasqskT0plvrpNNzeF07XyYVWjCHkO77ewI/Ux/oX6cLcpSyXkkRoDyhh/30A==
   dependencies:
     "@types/node" "^16.11.9"
 

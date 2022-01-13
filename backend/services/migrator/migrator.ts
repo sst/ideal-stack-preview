@@ -7,5 +7,7 @@ export async function handler() {
     db: SQL.DB,
     provider: new FileMigrationProvider(path.resolve("./backend/migrations")),
   });
-  console.log(await migrator.migrateToLatest());
+  const response = await migrator.migrateToLatest();
+  if (response.error) throw response.error;
+  return response.results;
 }
