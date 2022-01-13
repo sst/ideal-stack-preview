@@ -9,7 +9,7 @@
     "@aws-sdk/client-s3": "^3.46.0",
     "@aws-sdk/s3-request-presigner": "^3.46.0",
     "@types/aws-lambda": "^8.10.83",
-    "apollo-server-lambda": "^3.6.1",
+    "apollo-server-core": "^3.6.1",
     "aws-jwt-verify": "^2.0.0",
     "fetch-headers": "^3.0.1",
     "kysely": "^0.16.6",
