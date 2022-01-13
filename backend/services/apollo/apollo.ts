@@ -29,7 +29,7 @@ class ApolloServerLambda extends ApolloServerBase<ApolloContext> {
     const handler: APIGatewayProxyHandlerV2 = async (event, context) => {
       await this.ensureStarted();
 
-      if (event.rawPath === "/") {
+      if (event.rawPath === "/" && event.requestContext.http.method === "GET") {
         const landing = this.getLandingPage()!;
         return {
           statusCode: 200,
