@@ -1,5 +1,9 @@
 import { typeDefs } from "./schema";
 import { useContext } from "@acme/core";
+import { ApolloError } from "apollo-server-core";
+import { ApolloServerLambda } from "./toBeExtracted";
+import { CognitoJwtVerifier } from "aws-jwt-verify";
+import { config } from "core/config";
 import { merge } from "lodash-es";
 
 import { TodoResolver } from "./resolvers/todo";
@@ -8,15 +12,6 @@ import { SessionResolver } from "./resolvers/session";
 import { DebugResolver } from "./resolvers/debug";
 import { UploadResolver } from "./resolvers/upload";
 
-import { CognitoJwtVerifier } from "aws-jwt-verify";
-import { config } from "core/config";
-import { ApolloError } from "apollo-server-core";
-import { ApolloServerLambda } from "./toBeExtracted";
-
-const verifier = CognitoJwtVerifier.create({
-  userPoolId: config("COGNITO_USER_POOL_ID"),
-});
-
 const resolvers = merge([
   TodoResolver,
   UserResolver,
@@ -24,6 +19,10 @@ const resolvers = merge([
   DebugResolver,
   UploadResolver,
 ]);
+
+const verifier = CognitoJwtVerifier.create({
+  userPoolId: config("COGNITO_USER_POOL_ID"),
+});
 
 const server = new ApolloServerLambda({
   typeDefs,
