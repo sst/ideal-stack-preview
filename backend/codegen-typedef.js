@@ -1,5 +1,4 @@
 const { printSchemaWithDirectives } = require("@graphql-tools/utils");
-const { gql } = require("apollo-server-lambda");
 const { stripIgnoredCharacters } = require("graphql");
 
 const print = (schema) => `

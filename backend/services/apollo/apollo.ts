@@ -1,4 +1,8 @@
-import { ApolloServerBase, runHttpQuery } from "apollo-server-core";
+import {
+  ApolloError,
+  ApolloServerBase,
+  runHttpQuery,
+} from "apollo-server-core";
 import { Headers } from "fetch-headers";
 import { typeDefs } from "./schema";
 import { useContext } from "@acme/core";
@@ -96,16 +100,20 @@ const server = new ApolloServerLambda({
       });
 
     const token = auth.split("Bearer ")[1];
-    const payload = await verifier.verify(token, {
-      clientId: null,
-      tokenUse: "access",
-    });
-    return useContext({
-      type: "user",
-      properties: {
-        id: payload.sub,
-      },
-    });
+    try {
+      const payload = await verifier.verify(token, {
+        clientId: null,
+        tokenUse: "access",
+      });
+      return useContext({
+        type: "user",
+        properties: {
+          id: payload.sub,
+        },
+      });
+    } catch (ex) {
+      throw new ApolloError("Auth error", "auth_error");
+    }
   },
   resolvers,
 });

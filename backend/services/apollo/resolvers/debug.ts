@@ -1,7 +1,7 @@
-import { Context, SQL } from "@acme/core";
-import { Resolvers } from "./types";
+import { SQL } from "@acme/core";
+import { defineResolver } from "./resolver";
 
-export const DebugResolver: Resolvers<Context> = {
+export const DebugResolver = defineResolver({
   Query: {
     debug: async () => {
       return {};
@@ -13,4 +13,4 @@ export const DebugResolver: Resolvers<Context> = {
       return JSON.stringify(result);
     },
   },
-};
+});

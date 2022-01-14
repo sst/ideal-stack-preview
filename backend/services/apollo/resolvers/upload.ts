@@ -1,12 +1,11 @@
-import { Context } from "@acme/core";
-import { Resolvers } from "./types";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 import { config } from "core/config";
+import { defineResolver } from "./resolver";
 
 const s3 = new S3Client({});
 
-export const UploadResolver: Resolvers<Context> = {
+export const UploadResolver = defineResolver({
   Mutation: {
     upload: async (_parent, vars, ctx) => {
       const user = ctx.assertAuthenticated();
@@ -20,4 +19,4 @@ export const UploadResolver: Resolvers<Context> = {
       return url;
     },
   },
-};
+});

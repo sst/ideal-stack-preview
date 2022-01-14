@@ -1,7 +1,7 @@
-import { Context, Todo } from "@acme/core";
-import { Resolvers } from "./types";
+import { Todo } from "@acme/core";
+import { defineResolver } from "./resolver";
 
-export const TodoResolver: Resolvers<Context> = {
+export const TodoResolver = defineResolver({
   Mutation: {
     createTodo: async (_parent, args, ctx) =>
       await Todo.create(ctx, args.input),
@@ -18,4 +18,4 @@ export const TodoResolver: Resolvers<Context> = {
       }));
     },
   },
-};
+});

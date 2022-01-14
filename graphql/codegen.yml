@@ -17,7 +17,7 @@ generates:
 
   backend/services/apollo/schema.ts:
     plugins:
-      - ./backend/codegen-typedef.js
+      - backend/codegen-typedef.js
 
   frontend/src/data/urql.ts:
     documents:
@@ -28,3 +28,8 @@ generates:
       - typescript
       - typescript-operations
       - typescript-urql
+
+
+hooks:
+  afterOneFileWrite:
+    - prettier --write
