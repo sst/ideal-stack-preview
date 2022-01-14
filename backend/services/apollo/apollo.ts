@@ -8,14 +8,14 @@ import { typeDefs } from "./schema";
 import { useContext } from "@acme/core";
 import { merge } from "lodash-es";
 
-import { TodoResolver } from "./todo";
-import { UserResolver } from "./user";
-import { SessionResolver } from "./session";
-import { DebugResolver } from "./debug";
+import { TodoResolver } from "./resolvers/todo";
+import { UserResolver } from "./resolvers/user";
+import { SessionResolver } from "./resolvers/session";
+import { DebugResolver } from "./resolvers/debug";
+import { UploadResolver } from "./resolvers/upload";
 
 import { CognitoJwtVerifier } from "aws-jwt-verify";
 import { config } from "core/config";
-import { UploadResolver } from "./upload";
 
 import type {
   APIGatewayProxyEventV2,
