@@ -1,6 +1,6 @@
-import { defineResolver } from "./resolver";
+import { Resolvers } from "./types";
 
-export const UserResolver = defineResolver({
+export const UserResolver: Resolvers = {
   Query: {
     user: async (_parent, args) => {
       return {
@@ -8,4 +8,4 @@ export const UserResolver = defineResolver({
       };
     },
   },
-});
+};

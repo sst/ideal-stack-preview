@@ -1,7 +1,7 @@
 import { SQL } from "@acme/core";
-import { defineResolver } from "./resolver";
+import { Resolvers } from "./types";
 
-export const DebugResolver = defineResolver({
+export const DebugResolver: Resolvers = {
   Query: {
     debug: async () => {
       return {};
@@ -13,4 +13,4 @@ export const DebugResolver = defineResolver({
       return JSON.stringify(result);
     },
   },
-});
+};

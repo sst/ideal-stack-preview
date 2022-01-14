@@ -56,6 +56,5 @@ const server = new ApolloServerLambda({
   },
   resolvers,
 });
-server.start();
 
 export const handler = server.createHandler();

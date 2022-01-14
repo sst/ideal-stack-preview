@@ -3,7 +3,7 @@ schema:
   - graphql/*.graphql
 
 generates:
-  backend/services/apollo/types.ts:
+  backend/services/apollo/resolvers/types.ts:
     config:
       useIndexSignature: true
       makeResolverTypeCallable: true

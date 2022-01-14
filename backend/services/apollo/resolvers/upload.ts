@@ -1,11 +1,11 @@
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 import { config } from "core/config";
-import { defineResolver } from "./resolver";
+import { Resolvers } from "./types";
 
 const s3 = new S3Client({});
 
-export const UploadResolver = defineResolver({
+export const UploadResolver: Resolvers = {
   Mutation: {
     upload: async (_parent, vars, ctx) => {
       const user = ctx.assertAuthenticated();
@@ -19,4 +19,4 @@ export const UploadResolver = defineResolver({
       return url;
     },
   },
-});
+};

@@ -1,6 +1,6 @@
-import { defineResolver } from "./resolver";
+import { Resolvers } from "./types";
 
-export const SessionResolver = defineResolver({
+export const SessionResolver: Resolvers = {
   Query: {
     session: async (_parent, _args, ctx) => {
       const user = ctx.assertAuthenticated();
@@ -11,4 +11,4 @@ export const SessionResolver = defineResolver({
       };
     },
   },
-});
+};
