@@ -1,4 +1,4 @@
-import { ApolloServerBase, runHttpQuery } from "apollo-server-core";
+import { ApolloServerBase, Config, runHttpQuery } from "apollo-server-core";
 import { Headers } from "fetch-headers";
 
 import type {
@@ -13,6 +13,10 @@ type ApolloContext = {
 };
 
 export class ApolloServerLambda extends ApolloServerBase<ApolloContext> {
+  constructor(config: Config<ApolloContext>) {
+    super(config);
+    this.start();
+  }
   public createHandler() {
     const handler: APIGatewayProxyHandlerV2 = async (event, context) => {
       await this.ensureStarted();
