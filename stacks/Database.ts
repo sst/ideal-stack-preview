@@ -47,7 +47,8 @@ export class Database extends sst.Stack {
       bundle: {
         copyFiles: [
           {
-            from: "./backend/migrations",
+            from: "./migrations",
+            to: "backend/migrations",
           },
         ],
       },
