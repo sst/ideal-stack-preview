@@ -1,7 +1,7 @@
 import * as sst from "@serverless-stack/resources";
-import * as rds from "@aws-cdk/aws-rds";
-import * as ec2 from "@aws-cdk/aws-ec2";
-import { Duration } from "@aws-cdk/core";
+import * as rds from "aws-cdk-lib/aws-rds";
+import * as ec2 from "aws-cdk-lib/aws-ec2";
+import { Duration } from "aws-cdk-lib";
 
 export class Database extends sst.Stack {
   public readonly outputs: {
