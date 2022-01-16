@@ -36,9 +36,6 @@ export class Api extends sst.Stack {
           RDS_DATABASE: "acme",
           COGNITO_USER_POOL_ID: props.auth.userPool.userPoolId,
         },
-        bundle: {
-          externalModules: ["apollo-server-core"],
-        },
       },
     });
     props.db.cluster.secret?.grantRead(apollo.serverFunction);
