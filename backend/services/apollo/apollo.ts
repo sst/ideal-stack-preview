@@ -1,24 +1,13 @@
 import { typeDefs } from "./schema";
-import { useContext } from "@acme/core";
-import { ApolloError } from "apollo-server-core";
+import { useContext, config } from "@acme/core";
 import { ApolloServerLambda } from "./toBeExtracted";
 import { CognitoJwtVerifier } from "aws-jwt-verify";
-import { config } from "core/config";
-import { merge } from "lodash-es";
 
 import { TodoResolver } from "./resolvers/todo";
 import { UserResolver } from "./resolvers/user";
 import { SessionResolver } from "./resolvers/session";
 import { DebugResolver } from "./resolvers/debug";
 import { UploadResolver } from "./resolvers/upload";
-
-const resolvers = merge([
-  TodoResolver,
-  UserResolver,
-  SessionResolver,
-  DebugResolver,
-  UploadResolver,
-]);
 
 const verifier = CognitoJwtVerifier.create({
   userPoolId: config("COGNITO_USER_POOL_ID"),
@@ -27,10 +16,13 @@ const verifier = CognitoJwtVerifier.create({
 const server = new ApolloServerLambda({
   typeDefs,
   introspection: true,
-  formatError: (error) => {
-    console.log(error.extensions);
-    return error;
-  },
+  resolvers: [
+    TodoResolver,
+    UserResolver,
+    SessionResolver,
+    DebugResolver,
+    UploadResolver,
+  ],
   context: async (req) => {
     const auth = req.event.headers.authorization;
     if (!auth)
@@ -50,11 +42,8 @@ const server = new ApolloServerLambda({
           id: payload.sub,
         },
       });
-    } catch (ex) {
-      throw new ApolloError("Auth error", "auth_error");
-    }
+    } catch (ex) {}
   },
-  resolvers,
 });
 
 export const handler = server.createHandler();

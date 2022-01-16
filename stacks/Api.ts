@@ -37,7 +37,7 @@ export class Api extends sst.Stack {
           COGNITO_USER_POOL_ID: props.auth.userPool.userPoolId,
         },
         bundle: {
-          nodeModules: ["kysely", "kysely-data-api"],
+          externalModules: ["apollo-server-core"],
         },
       },
     });

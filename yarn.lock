@@ -7447,6 +7447,21 @@ aws-jwt-verify@^2.0.0:
   resolved "https://registry.yarnpkg.com/aws-jwt-verify/-/aws-jwt-verify-2.0.0.tgz#3b5b4dea17eb493971ea68394877ce3c14794d44"
   integrity sha512-J3rJdn4DJGqIuvRjDmAERix2Eo43KYapzgBJu3OfOmItSrV7DeOe9rC92HN+OPh8B4wqtK+D3PWfcJFexDHr7Q==
 
+aws-sdk@^2.1058.0:
+  version "2.1058.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.1058.0.tgz#77755516c6f678b98a1f29bd939f0d7ae42da90c"
+  integrity sha512-q6bTq1DBBeBaU6GKKoTHmJj16WOQHhOoK7jwV93IT8pO0P1XH99gesFofhew3eT0h8Ev7quVKutk4B1kfnIXPQ==
+  dependencies:
+    buffer "4.9.2"
+    events "1.1.1"
+    ieee754 "1.1.13"
+    jmespath "0.15.0"
+    querystring "0.2.0"
+    sax "1.2.1"
+    url "0.10.3"
+    uuid "3.3.2"
+    xml2js "0.4.19"
+
 aws-sdk@^2.761.0, aws-sdk@^2.848.0:
   version "2.974.0"
   resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.974.0.tgz#4380e4746b2a799e3833a0ab021f3292b045ac63"
