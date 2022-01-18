@@ -1,6 +1,6 @@
 import { config } from "core/config";
 import { Resolvers } from "./types";
-import S3 from "aws-sdk/clients/s3";
+import S3 from "aws-sdk/clients/s3.js";
 
 const s3 = new S3();
 

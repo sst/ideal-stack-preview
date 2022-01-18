@@ -3,7 +3,7 @@ schema:
   - graphql/*.graphql
 
 generates:
-  backend/services/apollo/resolvers/types.ts:
+  backend/services/gql/resolvers/types.ts:
     config:
       useIndexSignature: true
       makeResolverTypeCallable: true
@@ -15,9 +15,9 @@ generates:
       - add:
           content: "import { DeepPartial } from 'utility-types';"
 
-  backend/services/apollo/schema.ts:
+  backend/services/gql/schema.ts:
     plugins:
-      - backend/codegen-typedef.js
+      - backend/codegen-typedef.cjs
 
   frontend/src/data/urql.ts:
     documents:

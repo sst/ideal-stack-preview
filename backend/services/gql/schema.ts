@@ -1,4 +1,4 @@
-import { gql } from "apollo-server-core";
+import { gql } from "graphql-tag";
 export const typeDefs = gql`
   schema {
     query: Query
@@ -9,7 +9,7 @@ export const typeDefs = gql`
     title: String!
   }
   type Debug {
-    scrap: String!
+    database: String!
   }
   type Mutation {
     createTodo(input: CreateTodoInput!): Todo!

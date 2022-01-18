@@ -1,22 +1,20 @@
 {
   "name": "@acme/backend",
   "version": "0.0.1",
-  "scripts": {
-    "script": "esr",
-    "test": "jest"
-  },
+  "type": "module",
+  "scripts": {},
   "dependencies": {
+    "@graphql-tools/schema": "^8.3.1",
     "apollo-server-core": "^3.6.1",
     "aws-jwt-verify": "^2.0.0",
     "aws-sdk": "^2.1058.0",
     "fetch-headers": "^3.0.1",
+    "graphql-helix": "^1.11.0",
     "kysely": "^0.16.6",
     "kysely-data-api": "^0.0.9"
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.89",
-    "esbuild-runner": "^2.2.1",
-    "jest": "^27.2.0",
     "utility-types": "^3.10.0"
   }
 }

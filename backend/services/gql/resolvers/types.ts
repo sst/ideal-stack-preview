@@ -31,7 +31,7 @@ export type CreateTodoInput = {
 
 export type Debug = {
   __typename?: "Debug";
-  scrap: Scalars["String"];
+  database: Scalars["String"];
 };
 
 export type Mutation = {
@@ -222,7 +222,7 @@ export type DebugResolvers<
   ContextType = Context,
   ParentType extends ResolversParentTypes["Debug"] = ResolversParentTypes["Debug"]
 > = ResolversObject<{
-  scrap?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  database?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 

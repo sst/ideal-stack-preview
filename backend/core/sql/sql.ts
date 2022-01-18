@@ -1,7 +1,7 @@
 import { Kysely } from "kysely";
 import { DataApiDialect } from "kysely-data-api";
 import { config } from "../config";
-import RDSDataService from "aws-sdk/clients/rdsdataservice";
+import RDSDataService from "aws-sdk/clients/rdsdataservice.js";
 
 type TodoRow = {
   id: string;

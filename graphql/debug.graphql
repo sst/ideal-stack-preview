@@ -3,5 +3,5 @@ type Query {
 }
 
 type Debug {
-  scrap: String!
+  database: String!
 }

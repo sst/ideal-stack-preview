@@ -1,6 +1,5 @@
 import { typeDefs } from "./schema";
-import { useContext, config } from "@acme/core";
-import { ApolloServerLambda } from "./toBeExtracted";
+import { useContext, config, Context } from "@acme/core";
 import { CognitoJwtVerifier } from "aws-jwt-verify";
 
 import { TodoResolver } from "./resolvers/todo";
@@ -8,14 +7,14 @@ import { UserResolver } from "./resolvers/user";
 import { SessionResolver } from "./resolvers/session";
 import { DebugResolver } from "./resolvers/debug";
 import { UploadResolver } from "./resolvers/upload";
+import { createGQLHandler } from "services/extract";
 
 const verifier = CognitoJwtVerifier.create({
   userPoolId: config("COGNITO_USER_POOL_ID"),
 });
 
-const server = new ApolloServerLambda({
+export const handler = createGQLHandler<Context>({
   typeDefs,
-  introspection: true,
   resolvers: [
     TodoResolver,
     UserResolver,
@@ -25,25 +24,23 @@ const server = new ApolloServerLambda({
   ],
   context: async (req) => {
     const auth = req.event.headers.authorization;
-    if (!auth)
-      return useContext({
-        type: "public",
-      });
-
-    const token = auth.split("Bearer ")[1];
-    try {
-      const payload = await verifier.verify(token, {
-        clientId: null,
-        tokenUse: "access",
-      });
-      return useContext({
-        type: "user",
-        properties: {
-          id: payload.sub,
-        },
-      });
-    } catch (ex) {}
+    if (auth) {
+      const token = auth.split("Bearer ")[1];
+      try {
+        const payload = await verifier.verify(token, {
+          clientId: null,
+          tokenUse: "access",
+        });
+        return useContext({
+          type: "user",
+          properties: {
+            id: payload.sub,
+          },
+        });
+      } catch (ex) {}
+    }
+    return useContext({
+      type: "public",
+    });
   },
 });
-
-export const handler = server.createHandler();

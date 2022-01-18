@@ -25,10 +25,13 @@ export class Api extends sst.Stack {
     });
 
     const apollo = new sst.ApolloApi(this, "apollo", {
-      server: "services/apollo/apollo.handler",
+      server: "services/gql/gql.handler",
       defaultPayloadFormatVersion: sst.ApiPayloadFormatVersion.V2,
       defaultFunctionProps: {
         permissions: [bucket],
+        bundle: {
+          format: "esm",
+        },
         environment: {
           BUCKET: bucket.bucketName,
           RDS_SECRET: props.db.cluster.secret!.secretArn,

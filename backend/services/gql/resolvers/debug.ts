@@ -8,7 +8,7 @@ export const DebugResolver: Resolvers = {
     },
   },
   Debug: {
-    scrap: async () => {
+    database: async () => {
       const result = await SQL.DB.raw("SELECT 1").execute();
       return JSON.stringify(result);
     },
