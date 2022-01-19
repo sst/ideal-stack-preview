@@ -1,12 +1,14 @@
 {
   "extends": "../tsconfig.json",
-  "include": ["core", "services", "test", "scripts"],
+  "include": ["core", "services", "extract", "test", "scripts"],
   "compilerOptions": {
+    "types": ["services/config"],
     "module": "esnext",
     "moduleResolution": "node",
     "baseUrl": ".",
     "paths": {
-      "@acme/core": ["./core"]
+      "@acme/core": ["./core"],
+      "@serverless-stack/backend": ["./extract"]
     }
   }
 }

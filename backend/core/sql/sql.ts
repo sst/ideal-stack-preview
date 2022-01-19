@@ -1,6 +1,6 @@
 import { Kysely } from "kysely";
 import { DataApiDialect } from "kysely-data-api";
-import { config } from "../config";
+import { Config } from "@serverless-stack/backend";
 import RDSDataService from "aws-sdk/clients/rdsdataservice.js";
 
 type TodoRow = {
@@ -18,9 +18,9 @@ export const DB = new Kysely<Database>({
     mode: "postgres",
     driver: {
       client: new RDSDataService(),
-      database: config("RDS_DATABASE"),
-      secretArn: config("RDS_SECRET"),
-      resourceArn: config("RDS_ARN"),
+      database: Config.RDS_DATABASE,
+      secretArn: Config.RDS_SECRET,
+      resourceArn: Config.RDS_ARN,
     },
   }),
 });

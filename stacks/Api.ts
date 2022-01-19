@@ -3,6 +3,7 @@ import { HttpMethods } from "aws-cdk-lib/aws-s3";
 
 import { Database } from "./Database";
 import { Auth } from "./Auth";
+import { Parameter } from "./Parameter";
 
 type Props = {
   db: Database["outputs"];
@@ -32,17 +33,34 @@ export class Api extends sst.Stack {
         bundle: {
           format: "esm",
         },
-        environment: {
-          BUCKET: bucket.bucketName,
-          RDS_SECRET: props.db.cluster.secret!.secretArn,
-          RDS_ARN: props.db.cluster.clusterArn,
-          RDS_DATABASE: "acme",
-          COGNITO_USER_POOL_ID: props.auth.userPool.userPoolId,
-        },
       },
     });
     props.db.cluster.secret?.grantRead(apollo.serverFunction);
     props.db.cluster.grantDataApiAccess(apollo.serverFunction);
+
+    Parameter.use(
+      apollo.serverFunction,
+      new Parameter(this, { name: "BUCKET", value: bucket.bucketName }),
+      new Parameter(this, {
+        name: "RDS_SECRET",
+        value: props.db.cluster.secret!.secretArn,
+      }),
+      new Parameter(this, {
+        name: "RDS_ARN",
+        value: props.db.cluster.clusterArn,
+      }),
+      new Parameter(this, {
+        name: "RDS_DATABASE",
+        value: "acme",
+      }),
+      new Parameter(this, {
+        name: "COGNITO_USER_POOL_ID",
+        value: props.auth.userPool.userPoolId,
+      }),
+      new Parameter(this, {
+        name: "MY_SPECIAL_CONFIG",
+      })
+    );
 
     this.outputs = {
       apollo: apollo.url,

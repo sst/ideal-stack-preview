@@ -1,5 +1,6 @@
 import { typeDefs } from "./schema";
-import { useContext, config, Context } from "@acme/core";
+import { useContext, Context } from "@acme/core";
+import { Config } from "@serverless-stack/backend";
 import { CognitoJwtVerifier } from "aws-jwt-verify";
 
 import { TodoResolver } from "./resolvers/todo";
@@ -7,10 +8,10 @@ import { UserResolver } from "./resolvers/user";
 import { SessionResolver } from "./resolvers/session";
 import { DebugResolver } from "./resolvers/debug";
 import { UploadResolver } from "./resolvers/upload";
-import { createGQLHandler } from "services/extract";
+import { createGQLHandler } from "@serverless-stack/backend";
 
 const verifier = CognitoJwtVerifier.create({
-  userPoolId: config("COGNITO_USER_POOL_ID"),
+  userPoolId: Config.COGNITO_USER_POOL_ID,
 });
 
 export const handler = createGQLHandler<Context>({
