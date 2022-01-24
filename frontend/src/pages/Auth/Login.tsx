@@ -1,4 +1,4 @@
-import { useCognito } from "@app/auth";
+import { useCognito } from "@serverless-stack/web";
 import { useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 

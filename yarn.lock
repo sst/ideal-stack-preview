@@ -4332,18 +4332,18 @@
   dependencies:
     any-observable "^0.3.0"
 
-"@serverless-stack/aws-lambda-ric@^2.0.9":
-  version "2.0.9"
-  resolved "https://registry.yarnpkg.com/@serverless-stack/aws-lambda-ric/-/aws-lambda-ric-2.0.9.tgz#185ff1bb090307e1d4821481796836126a38182d"
-  integrity sha512-1xOCwzHlQSevIry34hf1aSqkk04wEY5Hr76cmMGFO8AokgyA/QN49vS4u76GkY1G2NMZdHIsPrVsqCKcj/SXSA==
+"@serverless-stack/aws-lambda-ric@^2.0.10":
+  version "2.0.10"
+  resolved "https://registry.yarnpkg.com/@serverless-stack/aws-lambda-ric/-/aws-lambda-ric-2.0.10.tgz#55953affd7e69fe8c552b6bec08a97af539596d4"
+  integrity sha512-+EOqPlfhNxTlYhaAWX0WKwUjaE9tOpNU6L2MWv12JCnSxWXpKXtnkhoNbA3SIntE5XtH84dCWmcmPSOAsU3/xQ==
   dependencies:
     node-addon-api "3.2.1"
     node-gyp "8.1.0"
 
-"@serverless-stack/cli@0.60.2":
-  version "0.60.2"
-  resolved "https://registry.yarnpkg.com/@serverless-stack/cli/-/cli-0.60.2.tgz#0a3315ae23a02749ef6b3fa491b009a14b5b3585"
-  integrity sha512-WZBvGAVYdH+VqAVVUdGGrqURDM57LIaf4syZ+29/G5ds+HD2tk0AaUNIOA4zaixXTM8KEZDGsGNpP07Y9E4PPg==
+"@serverless-stack/cli@0.60.5-next.7":
+  version "0.60.5-next.7"
+  resolved "https://registry.yarnpkg.com/@serverless-stack/cli/-/cli-0.60.5-next.7.tgz#c77c9504ec799e15cd0a81cfb721a47fe0314b7b"
+  integrity sha512-IFA7Rys/PqW828PqtY0kUXKtygxLJQCd8zawgsgLquTmqZAIxQ325mEcqFmZnDcf2Zbqg3mmo3vh2BoBGS0p7A==
   dependencies:
     "@aws-cdk/aws-apigatewayv2-alpha" "2.7.0-alpha.0"
     "@babel/core" "^7.10.5"
@@ -4351,9 +4351,9 @@
     "@babel/eslint-plugin" "^7.11.3"
     "@babel/plugin-proposal-class-properties" "^7.10.4"
     "@babel/preset-env" "^7.10.4"
-    "@serverless-stack/aws-lambda-ric" "^2.0.9"
-    "@serverless-stack/core" "^0.60.2"
-    "@serverless-stack/resources" "^0.60.2"
+    "@serverless-stack/aws-lambda-ric" "^2.0.10"
+    "@serverless-stack/core" "0.60.5-next.7+e788c727"
+    "@serverless-stack/resources" "0.60.5-next.7+e788c727"
     "@types/jest" "^27.0.2"
     "@types/node" "^14.0.27"
     "@typescript-eslint/eslint-plugin" "^4.15.1"
@@ -4371,7 +4371,7 @@
     esbuild "^0.12.20"
     esbuild-runner "^2.2.1"
     eslint "^7.16.0"
-    eslint-config-serverless-stack "^0.60.2"
+    eslint-config-serverless-stack "0.60.5-next.7+e788c727"
     express "^4.17.1"
     fast-safe-stringify "^2.0.6"
     fs-extra "^9.0.1"
@@ -4389,42 +4389,10 @@
     ws "^7.4.0"
     yargs "^15.4.1"
 
-"@serverless-stack/core@^0.56.2":
-  version "0.56.2"
-  resolved "https://registry.yarnpkg.com/@serverless-stack/core/-/core-0.56.2.tgz#a552aa12345055eec84ddaff1da595aa8b601108"
-  integrity sha512-67n9vGOn9KIHCXDED3E5eUKfFgOyejisaA3Iy0+7ybI9sdDFN49rrj/F/SQWm0YlnfDD7wak0l4CaMa1iBD/fw==
-  dependencies:
-    "@aws-sdk/client-s3" "^3.45.0"
-    "@trpc/client" "^9.16.0"
-    "@trpc/react" "^9.16.0"
-    "@trpc/server" "^9.16.0"
-    "@types/picomatch" "^2.3.0"
-    aws-cdk "1.132.0"
-    aws-sdk "^2.761.0"
-    chalk "^4.1.0"
-    chokidar "^3.5.2"
-    cross-spawn "^7.0.3"
-    dataloader "^2.0.0"
-    dendriform-immer-patch-optimiser "^2.1.0"
-    dotenv "^10.0.0"
-    dotenv-expand "^5.1.0"
-    express "^4.17.1"
-    fs-extra "^9.0.1"
-    immer "^9.0.7"
-    js-yaml "^4.1.0"
-    log4js "^6.3.0"
-    picomatch "^2.3.0"
-    remeda "^0.0.32"
-    stun "^2.1.0"
-    typescript "^4.4.3"
-    uuid "^8.3.2"
-    xstate "^4.26.1"
-    zod "^3.11.6"
-
-"@serverless-stack/core@^0.60.2":
-  version "0.60.2"
-  resolved "https://registry.yarnpkg.com/@serverless-stack/core/-/core-0.60.2.tgz#14d896acfca6a5ebe80d0981e4c0a84a8ec9b305"
-  integrity sha512-hVN27ooNpVwZuM+J9f8jv86y/GOd8UKIX5s2kTNBhht3u+UWyPpUK2y0ry52LMlgGN8B2SHJvHj0N2BzOMIR0g==
+"@serverless-stack/core@0.60.5-next.7+e788c727":
+  version "0.60.5-next.7"
+  resolved "https://registry.yarnpkg.com/@serverless-stack/core/-/core-0.60.5-next.7.tgz#35d4c13db857028927e6a99f6fdb14ac4605bfa5"
+  integrity sha512-EBzzXfskYxzD+RuFDV7r8x51r25+n2LENKiddJ0W4Hw+gAQ0GJ5H43HpXe0K/M2jVmeMOVtLhh563KRv47j1RA==
   dependencies:
     "@aws-sdk/client-s3" "^3.45.0"
     "@trpc/client" "^9.16.0"
@@ -4457,6 +4425,38 @@
     remeda "^0.0.32"
     stun "^2.1.0"
     ts-jest "^26.1.4"
+    typescript "^4.4.3"
+    uuid "^8.3.2"
+    xstate "^4.26.1"
+    zod "^3.11.6"
+
+"@serverless-stack/core@^0.56.2":
+  version "0.56.2"
+  resolved "https://registry.yarnpkg.com/@serverless-stack/core/-/core-0.56.2.tgz#a552aa12345055eec84ddaff1da595aa8b601108"
+  integrity sha512-67n9vGOn9KIHCXDED3E5eUKfFgOyejisaA3Iy0+7ybI9sdDFN49rrj/F/SQWm0YlnfDD7wak0l4CaMa1iBD/fw==
+  dependencies:
+    "@aws-sdk/client-s3" "^3.45.0"
+    "@trpc/client" "^9.16.0"
+    "@trpc/react" "^9.16.0"
+    "@trpc/server" "^9.16.0"
+    "@types/picomatch" "^2.3.0"
+    aws-cdk "1.132.0"
+    aws-sdk "^2.761.0"
+    chalk "^4.1.0"
+    chokidar "^3.5.2"
+    cross-spawn "^7.0.3"
+    dataloader "^2.0.0"
+    dendriform-immer-patch-optimiser "^2.1.0"
+    dotenv "^10.0.0"
+    dotenv-expand "^5.1.0"
+    express "^4.17.1"
+    fs-extra "^9.0.1"
+    immer "^9.0.7"
+    js-yaml "^4.1.0"
+    log4js "^6.3.0"
+    picomatch "^2.3.0"
+    remeda "^0.0.32"
+    stun "^2.1.0"
     typescript "^4.4.3"
     uuid "^8.3.2"
     xstate "^4.26.1"
@@ -4495,10 +4495,20 @@
     path-to-regexp "^6.1.0"
     send "^0.17.1"
 
-"@serverless-stack/resources@0.60.2", "@serverless-stack/resources@^0.60.2":
-  version "0.60.2"
-  resolved "https://registry.yarnpkg.com/@serverless-stack/resources/-/resources-0.60.2.tgz#2ae48d98863c389e55139c3ecf55c005951bd0ab"
-  integrity sha512-m2DYfrtkWHj1G7AoQJ7yxgLWnoHGZ65kOV8ICD2r0yC1/qIVk6HKN2KLRYW9Er9Y1RnEKAuXtMVMqpdLsoNXSQ==
+"@serverless-stack/node@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@serverless-stack/node/-/node-0.2.0.tgz#a6021428ab83c899f72bfef1c876de6e5353b335"
+  integrity sha512-7eVZ9clFRPMybPyvi4sFV/m/UEgTh2J9Tb9YdfBO7RHp/Orn56GnjZgb6L1RnJFRQHXPxYfGV/4BZJxwOa4u7g==
+  dependencies:
+    "@graphql-tools/schema" "^8.3.1"
+    "@tsconfig/node14" "^1.0.1"
+    aws-sdk "^2.1061.0"
+    graphql-helix "^1.11.0"
+
+"@serverless-stack/resources@0.60.5-next.7", "@serverless-stack/resources@0.60.5-next.7+e788c727":
+  version "0.60.5-next.7"
+  resolved "https://registry.yarnpkg.com/@serverless-stack/resources/-/resources-0.60.5-next.7.tgz#7d1e7263cce448730fbb1d2e1cbaf1077dbe2132"
+  integrity sha512-H1vz8KahkgEsVE0lfxlQHjuUlXJogprMg16tdHhjN88sK02u0XQgw4djHZavy3sbJJS2bdHrTYbwpn9VozFeQg==
   dependencies:
     "@aws-cdk/aws-apigatewayv2-alpha" "2.7.0-alpha.0"
     "@aws-cdk/aws-apigatewayv2-authorizers-alpha" "2.7.0-alpha.0"
@@ -4506,7 +4516,7 @@
     "@aws-cdk/aws-appsync-alpha" "2.7.0-alpha.0"
     "@graphql-tools/load-files" "^6.3.2"
     "@graphql-tools/merge" "^6.2.14"
-    "@serverless-stack/core" "^0.60.2"
+    "@serverless-stack/core" "0.60.5-next.7+e788c727"
     "@serverless-stack/nextjs-lambda" "^0.1.9"
     "@types/jest" "^26.0.7"
     archiver "^5.3.0"
@@ -4532,6 +4542,11 @@
     "@serverless-stack/core" "^0.56.2"
     chalk "^4.1.0"
     yargs "^15.4.1"
+
+"@serverless-stack/web@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@serverless-stack/web/-/web-0.2.0.tgz#ed605f3442c67fd3786720436fa429fe31bb3aa3"
+  integrity sha512-wTcebUhsc16WA9GpbtsEM9oXhSWV5VlU7LhoqJi9yrELetykUf9o5nMT5cJz5s5j2O2qpDtCwxoulFaPKuPwUA==
 
 "@sindresorhus/is@^0.14.0":
   version "0.14.0"
@@ -5232,17 +5247,6 @@ ajv@^8.0.1:
     require-from-string "^2.0.2"
     uri-js "^4.2.2"
 
-amazon-cognito-identity-js@^5.2.4:
-  version "5.2.4"
-  resolved "https://registry.yarnpkg.com/amazon-cognito-identity-js/-/amazon-cognito-identity-js-5.2.4.tgz#9b0168a59bd1b933e89b560840f1c50902b87269"
-  integrity sha512-CTRG5LKBfMYmNrqAU0l7X0SA4OOXsPFdHmkW0Ky3NOZZo767W5GZecm5uPz3YyAVde1OHaUyLXYzhXEmnn+VcQ==
-  dependencies:
-    buffer "4.9.2"
-    crypto-js "^4.1.1"
-    fast-base64-decode "^1.0.0"
-    isomorphic-unfetch "^3.0.0"
-    js-cookie "^2.2.1"
-
 anser@1.4.9:
   version "1.4.9"
   resolved "https://registry.yarnpkg.com/anser/-/anser-1.4.9.tgz#1f85423a5dcf8da4631a341665ff675b96845760"
@@ -5874,6 +5878,21 @@ aws-sdk@^2.1058.0:
     events "1.1.1"
     ieee754 "1.1.13"
     jmespath "0.15.0"
+    querystring "0.2.0"
+    sax "1.2.1"
+    url "0.10.3"
+    uuid "3.3.2"
+    xml2js "0.4.19"
+
+aws-sdk@^2.1061.0:
+  version "2.1061.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.1061.0.tgz#79c75e6856e5a59e0857d0d066a8ff5ff5e0d752"
+  integrity sha512-T29yV+EPo4Fis9hAArxAXS/u6utKnlBq3DEu85LTSIA8i6e6Xg7e9u7Rveo8DmrlVrf7EGCNThaeF9WERHnwLg==
+  dependencies:
+    buffer "4.9.2"
+    events "1.1.1"
+    ieee754 "1.1.13"
+    jmespath "0.16.0"
     querystring "0.2.0"
     sax "1.2.1"
     url "0.10.3"
@@ -7213,11 +7232,6 @@ crypto-browserify@3.12.0, crypto-browserify@^3.11.0:
     randombytes "^2.0.0"
     randomfill "^1.0.3"
 
-crypto-js@^4.1.1:
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/crypto-js/-/crypto-js-4.1.1.tgz#9e485bcf03521041bd85844786b83fb7619736cf"
-  integrity sha512-o2JlM7ydqd3Qk9CA0L4NL6mTzU2sdx96a+oOfPu8Mkl/PK51vSyoi8/rQ8NknZtk44vq15lmhAj9CIAGwgeWKw==
-
 css.escape@1.5.1:
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/css.escape/-/css.escape-1.5.1.tgz#42e27d4fa04ae32f931a4b4d4191fa9cddee97cb"
@@ -8171,10 +8185,10 @@ escodegen@^2.0.0:
   optionalDependencies:
     source-map "~0.6.1"
 
-eslint-config-serverless-stack@^0.60.2:
-  version "0.60.2"
-  resolved "https://registry.yarnpkg.com/eslint-config-serverless-stack/-/eslint-config-serverless-stack-0.60.2.tgz#9640e29d1a49f4961aa6dcf9d23e19552a7538df"
-  integrity sha512-I0oA58ToW+yeyszcpWLj9yXAIQNUD0Hpg/VQ5QNQWq+pcTGzHzhsCqtdzFEVsz4jJbL4yWTCRoEp2SmvUrvMyw==
+eslint-config-serverless-stack@0.60.5-next.7+e788c727:
+  version "0.60.5-next.7"
+  resolved "https://registry.yarnpkg.com/eslint-config-serverless-stack/-/eslint-config-serverless-stack-0.60.5-next.7.tgz#cfcf7523fdce7ccf31e30aa6b1c7745b257e51ec"
+  integrity sha512-WfJlADx/cFLcmJWMPgnBcfF3YD7gJI1NX0GO2ZqgDR2zL6qVQLj5lyPRYGvDeUeQqZTk+WvEG0xkLQhj9RQbqg==
   dependencies:
     "@babel/eslint-parser" "^7.11.3"
     "@babel/plugin-proposal-class-properties" "^7.10.4"
@@ -8545,11 +8559,6 @@ extract-files@^9.0.0:
   version "9.0.0"
   resolved "https://registry.yarnpkg.com/extract-files/-/extract-files-9.0.0.tgz#8a7744f2437f81f5ed3250ed9f1550de902fe54a"
   integrity sha512-CvdFfHkC95B4bBBk36hcEmvdR2awOdhhVUYH6S/zrVj3477zven/fJMYg7121h4T1xHZC+tetUpubpAhxwI7hQ==
-
-fast-base64-decode@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/fast-base64-decode/-/fast-base64-decode-1.0.0.tgz#b434a0dd7d92b12b43f26819300d2dafb83ee418"
-  integrity sha512-qwaScUgUGBYeDNRnbc/KyllVU88Jk1pRHPStuF/lO7B0/RTRLj7U0lkdTAutlBblY08rwZDff6tNU9cjv6j//Q==
 
 fast-deep-equal@^3.1.1, fast-deep-equal@^3.1.3:
   version "3.1.3"
@@ -10035,14 +10044,6 @@ isomorphic-fetch@^3.0.0:
     node-fetch "^2.6.1"
     whatwg-fetch "^3.4.1"
 
-isomorphic-unfetch@^3.0.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/isomorphic-unfetch/-/isomorphic-unfetch-3.1.0.tgz#87341d5f4f7b63843d468438128cb087b7c3e98f"
-  integrity sha512-geDJjpoZ8N0kWexiwkX8F9NkTsXhetLPVbZFQ+JTW239QNOwvB0gniuR1Wc6f0AMTn7/mFGyXvHTifrCp/GH8Q==
-  dependencies:
-    node-fetch "^2.6.1"
-    unfetch "^4.2.0"
-
 isomorphic-ws@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/isomorphic-ws/-/isomorphic-ws-4.0.1.tgz#55fd4cd6c5e6491e76dc125938dd863f5cd4f2dc"
@@ -10899,10 +10900,10 @@ jmespath@0.15.0:
   resolved "https://registry.yarnpkg.com/jmespath/-/jmespath-0.15.0.tgz#a3f222a9aae9f966f5d27c796510e28091764217"
   integrity sha1-o/Iiqarp+Wb10nx5ZRDigJF2Qhc=
 
-js-cookie@^2.2.1:
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/js-cookie/-/js-cookie-2.2.1.tgz#69e106dc5d5806894562902aa5baec3744e9b2b8"
-  integrity sha512-HvdH2LzI/EAZcUwA8+0nKNtWHqS+ZmijLA30RwZA0bo7ToCckjK5MkGhjED9KoRcXO6BaGI3I9UIzSA1FKFPOQ==
+jmespath@0.16.0:
+  version "0.16.0"
+  resolved "https://registry.yarnpkg.com/jmespath/-/jmespath-0.16.0.tgz#b15b0a85dfd4d930d43e69ed605943c802785076"
+  integrity sha512-9FzQjJ7MATs1tSpnco1K6ayiYE3figslrXA72G2HQ/n76RzvYlofyi5QM+iX4YRs/pu3yzxlVQSST23+dMDknw==
 
 "js-tokens@^3.0.0 || ^4.0.0", js-tokens@^4.0.0:
   version "4.0.0"
@@ -14764,11 +14765,6 @@ undici@^4.9.3:
   version "4.12.1"
   resolved "https://registry.yarnpkg.com/undici/-/undici-4.12.1.tgz#3a7b5fb12f835a96a65397dd94578464b08d1c27"
   integrity sha512-MSfap7YiQJqTPP12C11PFRs9raZuVicDbwsZHTjB0a8+SsCqt7KdUis54f373yf7ZFhJzAkGJLaKm0202OIxHg==
-
-unfetch@^4.2.0:
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/unfetch/-/unfetch-4.2.0.tgz#7e21b0ef7d363d8d9af0fb929a5555f6ef97a3be"
-  integrity sha512-F9p7yYCn6cIW9El1zi0HI6vqpeIvBsr3dSuRO6Xuppb1u5rXpCPmMvLSyECLhybr9isec8Ohl0hPekMVrEinDA==
 
 unicode-canonical-property-names-ecmascript@^1.0.4:
   version "1.0.4"

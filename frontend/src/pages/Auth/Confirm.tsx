@@ -1,6 +1,6 @@
-import { useCognito } from "@app/auth";
+import { useCognito } from "@serverless-stack/web";
 import { useState } from "react";
-import { Navigate, useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 export function Confirm() {
   const auth = useCognito();

@@ -25,15 +25,15 @@ export class Api extends sst.Stack {
       allowedHeaders: ["*"],
     });
 
-    const apollo = new sst.ApolloApi(this, "apollo", {
-      server: "services/gql/gql.handler",
-      defaultPayloadFormatVersion: sst.ApiPayloadFormatVersion.V2,
-      defaultFunctionProps: {
+    const apollo = new sst.GraphQLApi(this, "apollo", {
+      server: {
+        handler: "services/graphql/graphql.handler",
         permissions: [bucket],
         bundle: {
           format: "esm",
         },
       },
+      codegen: "./graphql/codegen.yml",
     });
     props.db.cluster.secret?.grantRead(apollo.serverFunction);
     props.db.cluster.grantDataApiAccess(apollo.serverFunction);

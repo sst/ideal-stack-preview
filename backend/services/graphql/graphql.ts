@@ -1,14 +1,16 @@
 import { typeDefs } from "./schema";
 import { useContext, Context } from "@acme/core";
-import { Config } from "@serverless-stack/backend";
 import { CognitoJwtVerifier } from "aws-jwt-verify";
 
 import { TodoResolver } from "./resolvers/todo";
 import { UserResolver } from "./resolvers/user";
 import { SessionResolver } from "./resolvers/session";
 import { DebugResolver } from "./resolvers/debug";
-import { UploadResolver } from "./resolvers/upload";
-import { createGQLHandler } from "@serverless-stack/backend";
+import {
+  createGQLHandler,
+  Config,
+  UploadResolver,
+} from "@serverless-stack/node";
 
 const verifier = CognitoJwtVerifier.create({
   userPoolId: Config.COGNITO_USER_POOL_ID,
@@ -21,7 +23,13 @@ export const handler = createGQLHandler<Context>({
     UserResolver,
     SessionResolver,
     DebugResolver,
-    UploadResolver,
+    UploadResolver<Context>({
+      user: async (ctx) => {
+        const user = ctx.assertAuthenticated();
+        return user.id;
+      },
+      bucket: Config.BUCKET,
+    }),
   ],
   context: async (req) => {
     const auth = req.event.headers.authorization;

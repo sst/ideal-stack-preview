@@ -4,7 +4,7 @@ import { Auth } from "./Auth";
 import { Database } from "./Database";
 import { Frontend } from "./Frontend";
 
-export default function main(app: sst.App): void {
+export default async function main(app: sst.App) {
   app.setDefaultFunctionProps({
     runtime: "nodejs14.x",
     srcPath: "backend",

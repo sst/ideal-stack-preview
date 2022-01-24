@@ -1,9 +1,10 @@
 overwrite: true
 schema:
   - graphql/*.graphql
+  - node_modules/@serverless-stack/node/graphql/*.graphql
 
 generates:
-  backend/services/gql/resolvers/types.ts:
+  backend/services/graphql/resolvers/types.ts:
     config:
       useIndexSignature: true
       makeResolverTypeCallable: true
@@ -15,7 +16,7 @@ generates:
       - add:
           content: "import { DeepPartial } from 'utility-types';"
 
-  backend/services/gql/schema.ts:
+  backend/services/graphql/schema.ts:
     plugins:
       - backend/codegen-typedef.cjs
 

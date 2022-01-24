@@ -1,6 +1,6 @@
 import { Resolvers } from "./types";
 import S3 from "aws-sdk/clients/s3.js";
-import { Config } from "@serverless-stack/backend";
+import { Config } from "@serverless-stack/node";
 
 const s3 = new S3();
 

@@ -1,6 +1,6 @@
-import { Config } from "@serverless-stack/backend";
+import { Config } from "@serverless-stack/node";
 
-declare module "@serverless-stack/backend" {
+declare module "@serverless-stack/node" {
   interface ConfigType {
     RDS_DATABASE: string;
     RDS_SECRET: string;
