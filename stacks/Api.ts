@@ -33,6 +33,11 @@ export class Api extends sst.Stack {
           format: "esm",
         },
       },
+      defaultFunctionProps: {
+        environment: {
+          FOO: "lol",
+        },
+      },
       codegen: "./graphql/codegen.yml",
     });
     props.db.cluster.secret?.grantRead(apollo.serverFunction);
