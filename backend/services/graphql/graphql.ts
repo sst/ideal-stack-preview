@@ -24,10 +24,7 @@ export const handler = createGQLHandler<Context>({
     SessionResolver,
     DebugResolver,
     UploadResolver<Context>({
-      user: async (ctx) => {
-        const user = ctx.assertAuthenticated();
-        return user.id;
-      },
+      user: async (ctx) => ctx.assertAuthenticated().id,
       bucket: Config.BUCKET,
     }),
   ],

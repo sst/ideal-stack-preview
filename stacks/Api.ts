@@ -25,7 +25,7 @@ export class Api extends sst.Stack {
       allowedHeaders: ["*"],
     });
 
-    const apollo = new sst.GraphQLApi(this, "apollo", {
+    const graphql = new sst.GraphQLApi(this, "graphql", {
       server: {
         handler: "services/graphql/graphql.handler",
         permissions: [bucket],
@@ -33,18 +33,13 @@ export class Api extends sst.Stack {
           format: "esm",
         },
       },
-      defaultFunctionProps: {
-        environment: {
-          FOO: "lol",
-        },
-      },
       codegen: "./graphql/codegen.yml",
     });
-    props.db.cluster.secret?.grantRead(apollo.serverFunction);
-    props.db.cluster.grantDataApiAccess(apollo.serverFunction);
+    props.db.cluster.secret?.grantRead(graphql.serverFunction);
+    props.db.cluster.grantDataApiAccess(graphql.serverFunction);
 
     Parameter.use(
-      apollo.serverFunction,
+      graphql.serverFunction,
       new Parameter(this, { name: "BUCKET", value: bucket.bucketName }),
       new Parameter(this, {
         name: "RDS_SECRET",
@@ -68,7 +63,7 @@ export class Api extends sst.Stack {
     );
 
     this.outputs = {
-      apollo: apollo.url,
+      apollo: graphql.url,
     };
   }
 }

@@ -7,7 +7,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@serverless-stack/web": "^0.2.0",
+    "@serverless-stack/web": "0.60.11",
+    "amazon-cognito-identity-js": "5.2.6",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router-dom": "^6.2.1",
