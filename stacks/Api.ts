@@ -27,23 +27,28 @@ export class Api extends sst.Stack {
 
     const graphql = new sst.GraphQLApi(this, "graphql", {
       server: {
-        handler: "services/graphql/graphql.handler",
-        permissions: [bucket],
+        handler: "functions/graphql/graphql.handler",
         bundle: {
           format: "esm",
         },
       },
       codegen: "./graphql/codegen.yml",
     });
-    props.db.cluster.secret?.grantRead(graphql.serverFunction);
-    props.db.cluster.grantDataApiAccess(graphql.serverFunction);
+    props.db.cluster.rdsServerlessCluster.grantDataApiAccess(
+      graphql.serverFunction
+    );
+    props.db.cluster.rdsServerlessCluster.secret?.grantRead(
+      graphql.serverFunction
+    );
+
+    new sst.Api(this, "APi", {});
 
     Parameter.use(
       graphql.serverFunction,
       new Parameter(this, { name: "BUCKET", value: bucket.bucketName }),
       new Parameter(this, {
         name: "RDS_SECRET",
-        value: props.db.cluster.secret!.secretArn,
+        value: props.db.cluster.secretArn,
       }),
       new Parameter(this, {
         name: "RDS_ARN",
@@ -51,7 +56,7 @@ export class Api extends sst.Stack {
       }),
       new Parameter(this, {
         name: "RDS_DATABASE",
-        value: "acme",
+        value: "starter",
       }),
       new Parameter(this, {
         name: "COGNITO_USER_POOL_ID",

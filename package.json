@@ -8,7 +8,7 @@
     "frontend"
   ],
   "scripts": {
-    "sst:start": "NODE_OPTIONS=--enable-source-maps AWS_SDK_LOAD_CONFIG=1 sst start",
+    "sst:start": "NODE_OPTIONS=--enable-source-maps sst start",
     "gql:gen": "graphql-codegen -c ./graphql/codegen.yml"
   },
   "devDependencies": {
@@ -18,8 +18,8 @@
     "@graphql-codegen/typescript-operations": "^2.2.2",
     "@graphql-codegen/typescript-resolvers": "^2.4.3",
     "@graphql-codegen/typescript-urql": "^3.4.2",
-    "@serverless-stack/cli": "0.60.11",
-    "@serverless-stack/resources": "0.60.11",
+    "@serverless-stack/cli": "0.65.1",
+    "@serverless-stack/resources": "0.65.1",
     "@tsconfig/node14": "^1.0.1",
     "graphql": "^16.2.0",
     "typescript": "^4.4.4"
