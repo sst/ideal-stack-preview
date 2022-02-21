@@ -8,7 +8,8 @@
     "frontend"
   ],
   "scripts": {
-    "sst:start": "NODE_OPTIONS=--enable-source-maps sst start",
+    "sst:start": "NODE_OPTIONS=--enable-source-maps AWS_PROFILE=ironbay-dev sst start",
+    "sst:removear": "NODE_OPTIONS=--enable-source-maps AWS_PROFILE=ironbay-dev sst remove --stage=dev",
     "gql:gen": "graphql-codegen -c ./graphql/codegen.yml"
   },
   "devDependencies": {

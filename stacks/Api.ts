@@ -33,6 +33,7 @@ export class Api extends sst.Stack {
         },
       },
       codegen: "./graphql/codegen.yml",
+      defaultPayloadFormatVersion: sst.ApiPayloadFormatVersion.V2,
     });
     props.db.cluster.rdsServerlessCluster.grantDataApiAccess(
       graphql.serverFunction
