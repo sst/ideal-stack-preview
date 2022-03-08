@@ -2,13 +2,16 @@ import { App, Function as Fn } from "@serverless-stack/resources";
 import { Effect, PolicyStatement } from "aws-cdk-lib/aws-iam";
 import { StringParameter } from "aws-cdk-lib/aws-ssm";
 import { Construct } from "constructs";
+import fs from "fs";
 
 export class Parameter extends Construct {
   public readonly name: string;
+  private static readonly all = new Set<string>();
 
   constructor(scope: Construct, name: string, value?: string) {
     super(scope, name);
     const app = App.of(scope) as App;
+    Parameter.all.add(name);
     this.name = name;
 
     if (value) {
@@ -50,5 +53,27 @@ export class Parameter extends Construct {
     func.addToRolePolicy(policy);
     func.addEnvironment("SSM_VALUES", values);
     func.addEnvironment("SSM_PREFIX", `/${app.name}/${app.stage}/`);
+  }
+
+  public static codegen() {
+    fs.mkdirSync("node_modules/@types/sst-parameters", {
+      recursive: true,
+    });
+    fs.writeFileSync(
+      "node_modules/@types/sst-parameters/package.json",
+      JSON.stringify({
+        types: "index.d.ts",
+      })
+    );
+    fs.writeFileSync(
+      "node_modules/@types/sst-parameters/index.d.ts",
+      `
+     import "@serverless-stack/node/config";
+     declare module "@serverless-stack/node/config" {
+      export interface ConfigType {
+        ${[...Parameter.all].map((p) => `${p}: string`).join(",\n")}
+      }
+    }`
+    );
   }
 }

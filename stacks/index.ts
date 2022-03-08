@@ -6,6 +6,7 @@ import { RemovalPolicy } from "aws-cdk-lib";
 import { init } from "./Functional";
 import { GraphQL } from "./Graphql";
 import { Upload } from "./Upload";
+import { Parameter } from "./Parameter";
 
 export default async function main(app: sst.App) {
   app.setDefaultFunctionProps({
@@ -19,4 +20,5 @@ export default async function main(app: sst.App) {
   if (app.local) app.setDefaultRemovalPolicy(RemovalPolicy.DESTROY);
 
   await init(app, Database, Auth, Upload, GraphQL, Frontend);
+  Parameter.codegen();
 }

@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {},
   "dependencies": {
-    "@serverless-stack/node": "0.68.0-next.9",
+    "@serverless-stack/node": "0.68.0-next.10",
     "aws-jwt-verify": "^2.0.0",
     "aws-sdk": "^2.1058.0",
     "kysely": "^0.16.6",
