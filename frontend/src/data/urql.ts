@@ -35,6 +35,7 @@ export type Mutation = {
   __typename?: "Mutation";
   createTodo: Todo;
   removeTodo?: Maybe<Todo>;
+  upload: Scalars["String"];
 };
 
 export type MutationCreateTodoArgs = {
@@ -43,6 +44,11 @@ export type MutationCreateTodoArgs = {
 
 export type MutationRemoveTodoArgs = {
   id: Scalars["String"];
+};
+
+export type MutationUploadArgs = {
+  name: Scalars["String"];
+  type: Scalars["String"];
 };
 
 export type Query = {

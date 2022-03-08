@@ -1,7 +1,6 @@
 overwrite: true
 schema:
   - graphql/*.graphql
-  - node_modules/@serverless-stack/node/graphql/*.graphql
 
 generates:
   backend/functions/graphql/resolvers/types.ts:
