@@ -23,6 +23,7 @@ class EmptyStack extends sst.Stack {
 }
 
 export function setStackProps(props: sst.StackProps) {
+  // TODO throw an error if current stack has been initialized
   stackPropsCache.set(currentStack, props);
 }
 
@@ -37,6 +38,9 @@ export async function init(app: sst.App, ...fns: FunctionalStack<any>[]) {
     let stack: EmptyStack | undefined;
     const props = {
       app,
+      // Stack is lazily created on first get ie. `props.stack` inside the
+      // functional stack. This allows functional stack to call `setStackProps`
+      // before the stack is created.
       get stack() {
         if (stack) return stack;
         stack = new EmptyStack(app, name);
