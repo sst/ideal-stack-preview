@@ -1,4 +1,4 @@
-import { SQL } from "@acme/core";
+import { SQL } from "@acme/core/sql";
 import { Resolvers } from "./types";
 
 export const DebugResolver: Resolvers = {

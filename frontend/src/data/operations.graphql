@@ -22,7 +22,3 @@ mutation CreateTodo($id: String!, $title: String!) {
     title
   }
 }
-
-mutation Upload($name: String!, $type: String!) {
-  upload(name: $name, type: $type)
-}

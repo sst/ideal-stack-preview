@@ -1,42 +1,25 @@
 import { typeDefs } from "./schema";
-import { useContext, Context } from "@acme/core";
-import { CognitoJwtVerifier } from "aws-jwt-verify";
+import { useContext, Context } from "@acme/core/context";
 
 import { TodoResolver } from "./resolvers/todo";
 import { UserResolver } from "./resolvers/user";
 import { SessionResolver } from "./resolvers/session";
 import { DebugResolver } from "./resolvers/debug";
-import {
-  createGQLHandler,
-  Config,
-  UploadResolver,
-} from "@serverless-stack/node";
+import { createGQLHandler } from "@serverless-stack/node/graphql";
+import { Auth } from "@serverless-stack/node/auth";
+import { Config } from "@serverless-stack/node/config";
 
-const verifier = CognitoJwtVerifier.create({
-  userPoolId: Config.COGNITO_USER_POOL_ID,
-});
+Auth.init(Config.COGNITO_USER_POOL_ID);
 
 export const handler = createGQLHandler<Context>({
   typeDefs,
-  resolvers: [
-    TodoResolver,
-    UserResolver,
-    SessionResolver,
-    DebugResolver,
-    UploadResolver<Context>({
-      user: async (ctx) => ctx.assertAuthenticated().id,
-      bucket: Config.BUCKET,
-    }),
-  ],
+  resolvers: [TodoResolver, UserResolver, SessionResolver, DebugResolver],
   context: async (req) => {
     const auth = req.event.headers.authorization;
     if (auth) {
-      const token = auth.split("Bearer ")[1];
+      const [_, token] = auth.split("Bearer ");
       try {
-        const payload = await verifier.verify(token, {
-          clientId: null,
-          tokenUse: "access",
-        });
+        const payload = await Auth.verify(token);
         return useContext({
           type: "user",
           properties: {

@@ -2,19 +2,18 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import * as urql from "urql";
-import { Config } from "./config";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { Cognito, CognitoProvider, useCognito } from "@serverless-stack/web";
 import { Auth } from "./pages/Auth";
 import { Todos } from "./pages/Todos";
 
 const cognito = new Cognito({
-  UserPoolId: Config.COGNITO_USER_POOL_ID,
-  ClientId: Config.COGNITO_CLIENT_ID,
+  UserPoolId: import.meta.env.VITE_COGNITO_USER_POOL_ID,
+  ClientId: import.meta.env.VITE_COGNITO_CLIENT_ID,
 });
 
 const client = urql.createClient({
-  url: Config.APOLLO_URL,
+  url: import.meta.env.VITE_GRAPHQL_URL,
   fetchOptions: () => {
     const token = cognito.session?.getAccessToken().getJwtToken();
     return {

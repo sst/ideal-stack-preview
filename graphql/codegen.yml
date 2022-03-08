@@ -4,11 +4,11 @@ schema:
   - node_modules/@serverless-stack/node/graphql/*.graphql
 
 generates:
-  backend/services/graphql/resolvers/types.ts:
+  backend/functions/graphql/resolvers/types.ts:
     config:
       useIndexSignature: true
       makeResolverTypeCallable: true
-      contextType: "@acme/core#Context"
+      contextType: "@acme/core/context#Context"
       defaultMapper: DeepPartial<{T}>
     plugins:
       - typescript
@@ -16,7 +16,7 @@ generates:
       - add:
           content: "import { DeepPartial } from 'utility-types';"
 
-  backend/services/graphql/schema.ts:
+  backend/functions/graphql/schema.ts:
     plugins:
       - backend/codegen-typedef.cjs
 

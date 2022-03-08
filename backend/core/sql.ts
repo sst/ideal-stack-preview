@@ -1,6 +1,6 @@
 import { Kysely } from "kysely";
 import { DataApiDialect } from "kysely-data-api";
-import { Config } from "@serverless-stack/node";
+import { Config } from "@serverless-stack/node/config";
 import RDSDataService from "aws-sdk/clients/rdsdataservice.js";
 
 type TodoRow = {
@@ -24,3 +24,5 @@ export const DB = new Kysely<Database>({
     },
   }),
 });
+
+export * as SQL from "./sql";

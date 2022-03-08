@@ -1,5 +1,5 @@
 import { GraphQLResolveInfo } from "graphql";
-import { Context } from "@acme/core";
+import { Context } from "@acme/core/context";
 import { DeepPartial } from "utility-types";
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
@@ -38,7 +38,6 @@ export type Mutation = {
   __typename?: "Mutation";
   createTodo: Todo;
   removeTodo?: Maybe<Todo>;
-  upload: Scalars["String"];
 };
 
 export type MutationCreateTodoArgs = {
@@ -47,11 +46,6 @@ export type MutationCreateTodoArgs = {
 
 export type MutationRemoveTodoArgs = {
   id: Scalars["String"];
-};
-
-export type MutationUploadArgs = {
-  name: Scalars["String"];
-  type: Scalars["String"];
 };
 
 export type Query = {
@@ -241,12 +235,6 @@ export type MutationResolvers<
     ParentType,
     ContextType,
     RequireFields<MutationRemoveTodoArgs, "id">
-  >;
-  upload?: Resolver<
-    ResolversTypes["String"],
-    ParentType,
-    ContextType,
-    RequireFields<MutationUploadArgs, "name" | "type">
   >;
 }>;
 

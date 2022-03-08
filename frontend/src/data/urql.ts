@@ -35,7 +35,6 @@ export type Mutation = {
   __typename?: "Mutation";
   createTodo: Todo;
   removeTodo?: Maybe<Todo>;
-  upload: Scalars["String"];
 };
 
 export type MutationCreateTodoArgs = {
@@ -44,11 +43,6 @@ export type MutationCreateTodoArgs = {
 
 export type MutationRemoveTodoArgs = {
   id: Scalars["String"];
-};
-
-export type MutationUploadArgs = {
-  name: Scalars["String"];
-  type: Scalars["String"];
 };
 
 export type Query = {
@@ -114,13 +108,6 @@ export type CreateTodoMutation = {
   createTodo: { __typename?: "Todo"; id: string; title: string };
 };
 
-export type UploadMutationVariables = Exact<{
-  name: Scalars["String"];
-  type: Scalars["String"];
-}>;
-
-export type UploadMutation = { __typename?: "Mutation"; upload: string };
-
 export const TodosDocument = gql`
   query Todos {
     session {
@@ -165,16 +152,5 @@ export const CreateTodoDocument = gql`
 export function useCreateTodoMutation() {
   return Urql.useMutation<CreateTodoMutation, CreateTodoMutationVariables>(
     CreateTodoDocument
-  );
-}
-export const UploadDocument = gql`
-  mutation Upload($name: String!, $type: String!) {
-    upload(name: $name, type: $type)
-  }
-`;
-
-export function useUploadMutation() {
-  return Urql.useMutation<UploadMutation, UploadMutationVariables>(
-    UploadDocument
   );
 }

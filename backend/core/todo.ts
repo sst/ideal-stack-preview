@@ -1,5 +1,5 @@
-import { SQL } from "../sql";
-import { Context } from "../context";
+import { SQL } from "./sql";
+import { Context } from "./context";
 
 type CreateOpts = {
   id: string;
@@ -41,3 +41,5 @@ export async function forUser(ctx: Context, opts: ForUserOpts) {
     .execute();
   return results;
 }
+
+export * as Todo from "./todo";

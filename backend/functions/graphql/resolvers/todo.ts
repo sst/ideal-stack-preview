@@ -1,4 +1,4 @@
-import { Todo } from "@acme/core";
+import { Todo } from "@acme/core/todo";
 import { Resolvers } from "./types";
 
 export const TodoResolver: Resolvers = {
