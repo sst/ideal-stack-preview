@@ -11,7 +11,8 @@ export type FunctionalStack<T> = (
 
 let currentApp: sst.App | undefined;
 let currentStack: FunctionalStack<any> | undefined;
-const exportsCache: Record<string, any> = {};
+
+const exportsCache = new Map<any, any>();
 const stackPropsCache = new Map<any, sst.StackProps>();
 
 class EmptyStack extends sst.Stack {
@@ -30,7 +31,7 @@ export async function init(app: sst.App, ...fns: FunctionalStack<any>[]) {
   for (const fn of fns) {
     currentStack = fn;
     const name = fn.name.toLowerCase();
-    const exists = exportsCache[name];
+    const exists = exportsCache.get(fn);
     if (exists)
       throw new Error(`Attempting to initialize stack ${name} several times`);
     let stack: EmptyStack | undefined;
@@ -45,17 +46,17 @@ export async function init(app: sst.App, ...fns: FunctionalStack<any>[]) {
     const result = await fn(props);
     if (!stack) stack = new EmptyStack(app, name);
     console.log(`Synthesized stack ${name}`);
-    exportsCache[name] = result;
+    exportsCache.set(fn, result);
   }
 }
 
 export function use<T>(stack: FunctionalStack<T>): T {
   if (!currentApp) throw new Error("No app is set");
-  const name = stack.name.toLowerCase();
-  const exists = exportsCache[name];
-  if (!exists)
+  const exists = exportsCache.get(stack);
+  if (!exists) {
     throw new Error(
-      `Initialize "${name}" stack before "${currentStack?.name.toLowerCase()}" stack`
+      `Initialize "${stack.name.toLowerCase()}" stack before "${currentStack?.name.toLowerCase()}" stack`
     );
+  }
   return exists;
 }
