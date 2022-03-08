@@ -4,7 +4,7 @@ import { Parameter } from "./Parameter";
 
 export function Database(props: FunctionalStackProps) {
   setStackProps({
-    description: "My favorite stack",
+    description: "This is the database stack",
   });
   const cluster = new sst.RDS(props.stack, "RDS", {
     engine: "postgresql10.14",
