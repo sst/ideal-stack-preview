@@ -16,8 +16,13 @@ const stackPropsCache = new Map<any, sst.StackProps>();
 
 class EmptyStack extends sst.Stack {
   constructor(scope: sst.App, id: string, props?: sst.StackProps) {
+    if (props) console.log(props);
     super(scope, id, props);
   }
+}
+
+export function setStackProps(props: sst.StackProps) {
+  stackPropsCache.set(currentStack, props);
 }
 
 export async function init(app: sst.App, ...fns: FunctionalStack<any>[]) {
@@ -28,40 +33,20 @@ export async function init(app: sst.App, ...fns: FunctionalStack<any>[]) {
     const exists = exportsCache[name];
     if (exists)
       throw new Error(`Attempting to initialize stack ${name} several times`);
-    const stackProps = stackPropsCache.get(fn);
-    const stack = new EmptyStack(app, name, stackProps);
-    const result = await fn({
+    let stack: EmptyStack | undefined = undefined;
+    const props = {
       app,
-      stack,
-    });
+      get stack() {
+        if (stack) return stack;
+        const stackProps = stackPropsCache.get(fn);
+        stack = new EmptyStack(app, name, stackProps);
+        return stack;
+      },
+    };
+    const result = await fn(props);
     console.log(`Synthesized stack ${name}`);
     exportsCache[name] = result;
   }
-}
-
-export function defineStack<T>(props: sst.StackProps): FunctionalStack<T>;
-export function defineStack<T>(cb: FunctionalStack<T>): FunctionalStack<T>;
-export function defineStack<T>(
-  props: sst.StackProps,
-  cb: FunctionalStack<T>
-): FunctionalStack<T>;
-export function defineStack<T>(
-  cb_or_props: FunctionalStack<T> | sst.StackProps,
-  cb?: FunctionalStack<T>
-) {
-  const opts =
-    typeof cb_or_props === "function"
-      ? { cb: cb_or_props, props: undefined }
-      : { cb, props: cb_or_props };
-  if (opts.props) stackPropsCache.set(opts.cb, opts.props);
-  return opts.cb;
-}
-
-export function OverrideStackProps(
-  stack: FunctionalStack<any>,
-  props: sst.StackProps
-) {
-  stackPropsCache.set(stack, props);
 }
 
 export function use<T>(stack: FunctionalStack<T>): T {
