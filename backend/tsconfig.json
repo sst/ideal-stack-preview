@@ -3,6 +3,7 @@
   "include": ["core", "functions", "test", "scripts"],
   "compilerOptions": {
     "module": "esnext",
+    "allowSyntheticDefaultImports": true,
     "moduleResolution": "node",
     "baseUrl": ".",
     "paths": {

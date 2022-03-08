@@ -6,20 +6,27 @@ import { UserResolver } from "./resolvers/user";
 import { SessionResolver } from "./resolvers/session";
 import { DebugResolver } from "./resolvers/debug";
 import { createGQLHandler } from "@serverless-stack/node/graphql";
-import { Auth } from "@serverless-stack/node/auth";
+import { Cognito } from "@serverless-stack/node/cognito";
 import { Config } from "@serverless-stack/node/config";
+import { UploadResolver } from "./resolvers/upload";
 
-Auth.init(Config.COGNITO_USER_POOL_ID);
+const cognito = Cognito.create(Config.COGNITO_USER_POOL_ID);
 
 export const handler = createGQLHandler<Context>({
   typeDefs,
-  resolvers: [TodoResolver, UserResolver, SessionResolver, DebugResolver],
+  resolvers: [
+    UploadResolver,
+    TodoResolver,
+    UserResolver,
+    SessionResolver,
+    DebugResolver,
+  ],
   context: async (req) => {
     const auth = req.event.headers.authorization;
     if (auth) {
       const [_, token] = auth.split("Bearer ");
       try {
-        const payload = await Auth.verify(token);
+        const payload = await cognito.verify(token);
         return useContext({
           type: "user",
           properties: {

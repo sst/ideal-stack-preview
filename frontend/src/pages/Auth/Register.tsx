@@ -1,9 +1,9 @@
-import { useCognito } from "@serverless-stack/web";
+import { Cognito } from "@serverless-stack/web";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 export function Register() {
-  const auth = useCognito();
+  const cognito = Cognito.use();
   const nav = useNavigate();
   const [error, errorSet] = useState<string>("");
 
@@ -11,7 +11,7 @@ export function Register() {
     event.preventDefault();
     const fd = new FormData(event.currentTarget);
     const email = fd.get("email") as string;
-    await auth
+    await cognito
       .register(email, fd.get("password") as string)
       .then(() => nav("/auth/confirm?email=" + email))
       .catch((err) => errorSet(err.message));

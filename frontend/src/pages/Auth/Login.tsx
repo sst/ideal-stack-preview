@@ -1,9 +1,9 @@
-import { useCognito } from "@serverless-stack/web";
+import { Cognito } from "@serverless-stack/web";
 import { useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 
 export function Login() {
-  const auth = useCognito();
+  const cognito = Cognito.use();
   const nav = useNavigate();
   const [error, errorSet] = useState<string>("");
   const [params] = useSearchParams();
@@ -13,7 +13,7 @@ export function Login() {
     event.preventDefault();
     const fd = new FormData(event.currentTarget);
     const email = fd.get("email") as string;
-    await auth
+    await cognito
       .login(email, fd.get("password") as string)
       .then(() => nav("/todos"))
       .catch((err) => {

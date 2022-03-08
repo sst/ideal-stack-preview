@@ -1,16 +1,17 @@
-import { useCognito } from "@serverless-stack/web";
+import { Cognito } from "@serverless-stack/web";
 import {
   useTodosQuery,
   useCreateTodoMutation,
   useRemoveTodoMutation,
+  useUploadMutation,
 } from "@app/data/urql";
 
 export function Todos() {
-  const cognito = useCognito();
+  const cognito = Cognito.use();
   const [todos] = useTodosQuery();
   const [, create] = useCreateTodoMutation();
   const [, remove] = useRemoveTodoMutation();
-  // const [, upload] = useUploadMutation();
+  const [, upload] = useUploadMutation();
 
   if (!todos.data) return <div>Loading...</div>;
 
@@ -29,18 +30,17 @@ export function Todos() {
       <input
         type="file"
         onChange={async (e) => {
-          /*
           const [file] = e.target.files!;
           const url = await upload({
             type: file.type,
             name: file.name,
           });
+          console.log(url);
           await fetch(url.data!.upload, {
             method: "PUT",
             body: file,
           });
           e.target.value = "";
-          */
         }}
       />
       <div>
@@ -59,7 +59,7 @@ export function Todos() {
       </div>
       <button
         onClick={() => {
-          cognito.user?.signOut();
+          cognito.state.user?.signOut();
           location.reload();
         }}
       >

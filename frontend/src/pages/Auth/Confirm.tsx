@@ -1,9 +1,9 @@
-import { useCognito } from "@serverless-stack/web";
+import { Cognito } from "@serverless-stack/web";
 import { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 export function Confirm() {
-  const auth = useCognito();
+  const cognito = Cognito.use();
   const nav = useNavigate();
   const [params] = useSearchParams();
   const email = params.get("email")!;
@@ -12,7 +12,7 @@ export function Confirm() {
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const fd = new FormData(event.currentTarget);
-    auth
+    cognito
       .confirm(email, fd.get("code") as string)
       .then(() => nav("/auth/login?email=" + email))
       .catch((err) => errorSet(err.message));
@@ -30,7 +30,7 @@ export function Confirm() {
         {error && <div>{error}</div>}
         <button type="submit">Confirm</button>
       </form>
-      <button onClick={() => auth.resend(email)}>Resend code</button>
+      <button onClick={() => cognito.resend(email)}>Resend code</button>
     </div>
   );
 }

@@ -17,7 +17,7 @@ generates:
 
   backend/functions/graphql/schema.ts:
     plugins:
-      - backend/codegen-typedef.cjs
+      - './node_modules/@serverless-stack/node/graphql/codegen.cjs'
 
   frontend/src/data/urql.ts:
     documents:
