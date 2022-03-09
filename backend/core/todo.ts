@@ -1,6 +1,16 @@
 import { SQL } from "./sql";
 import { Context } from "./context";
 
+declare module "@acme/core/sql" {
+  export interface Database {
+    todos: {
+      id: string;
+      title: string;
+      author_id: string;
+    };
+  }
+}
+
 type CreateOpts = {
   id: string;
   title: string;
