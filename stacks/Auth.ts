@@ -1,8 +1,7 @@
 import * as sst from "@serverless-stack/resources";
-import { FunctionalStackProps } from "./Functional";
-import { Parameter } from "./Parameter";
+import { Context } from "./Functional";
 
-export function Auth(props: FunctionalStackProps) {
+export function Auth(props: Context) {
   const auth = new sst.Auth(props.stack, "auth2", {
     cognito: {
       userPool: {
@@ -15,10 +14,5 @@ export function Auth(props: FunctionalStackProps) {
       },
     },
   });
-  return {
-    auth,
-    parameters: Parameter.create(props.stack, {
-      COGNITO_USER_POOL_ID: auth.cognitoUserPool!.userPoolId,
-    }),
-  };
+  return auth;
 }

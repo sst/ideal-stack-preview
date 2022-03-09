@@ -1,57 +1,34 @@
 import * as sst from "@serverless-stack/resources";
 
-export type FunctionalStackProps = {
+export type Context = {
   app: sst.App;
   stack: sst.Stack;
+  setStackProps: ReturnType<typeof createSetStackProps>;
 };
 
-export type FunctionalStack<T> = (
-  props: FunctionalStackProps
-) => T | Promise<T>;
+export type FunctionalStack<T> = (props: Context) => T | Promise<T>;
 
 let currentApp: sst.App | undefined;
 let currentStack: FunctionalStack<any> | undefined;
 
-const exportsCache = new Map<any, any>();
-const stackPropsCache = new Map<any, sst.StackProps>();
+interface StackProps extends sst.StackProps {
+  id?: string;
+}
+
+const exportsCache = new Map<FunctionalStack<any>, any>();
+const stackPropsCache = new Map<FunctionalStack<any>, StackProps>();
 
 class EmptyStack extends sst.Stack {
-  constructor(scope: sst.App, id: string) {
-    const props = stackPropsCache.get(currentStack);
-    super(scope, id, props);
+  constructor(scope: sst.App, fn: FunctionalStack<any>, id: string) {
+    const props = stackPropsCache.get(fn);
+    super(scope, props?.id || id, props);
   }
 }
-
-export function setStackProps(props: sst.StackProps) {
-  // TODO throw an error if current stack has been initialized
-  stackPropsCache.set(currentStack, props);
-}
-
-export async function init(app: sst.App, ...fns: FunctionalStack<any>[]) {
-  currentApp = app;
-  for (const fn of fns) {
-    currentStack = fn;
-    const name = fn.name.toLowerCase();
-    const exists = exportsCache.get(fn);
-    if (exists)
-      throw new Error(`Attempting to initialize stack ${name} several times`);
-    let stack: EmptyStack | undefined;
-    const props = {
-      app,
-      // Stack is lazily created on first get ie. `props.stack` inside the
-      // functional stack. This allows functional stack to call `setStackProps`
-      // before the stack is created.
-      get stack() {
-        if (stack) return stack;
-        stack = new EmptyStack(app, name);
-        return stack;
-      },
-    };
-    const result = await fn(props);
-    if (!stack) stack = new EmptyStack(app, name);
-    console.log(`Synthesized stack ${name}`);
-    exportsCache.set(fn, result);
-  }
+function createSetStackProps(fn: FunctionalStack<any>) {
+  return (props: StackProps) => {
+    // TODO throw an error if current stack has been initialized
+    stackPropsCache.set(fn, props);
+  };
 }
 
 export function use<T>(stack: FunctionalStack<T>): T {
@@ -63,4 +40,48 @@ export function use<T>(stack: FunctionalStack<T>): T {
     );
   }
   return exists;
+}
+
+interface StackBuilder {
+  stack<T extends FunctionalStack<any>>(
+    fn: T
+  ): ReturnType<T> extends Promise<any> ? Promise<void> : StackBuilder;
+}
+
+export function IgnoreThisWillBeRemoved(app: sst.App) {
+  currentApp = app;
+  const result: StackBuilder = {
+    stack<T extends FunctionalStack<any>>(
+      fn: T
+    ): ReturnType<T> extends Promise<any> ? Promise<void> : StackBuilder {
+      currentStack = fn;
+      const name = fn.name.toLowerCase();
+      const exists = exportsCache.has(fn);
+      if (exists)
+        throw new Error(`Attempting to initialize stack ${name} several times`);
+      let stack: EmptyStack | undefined;
+      const props: Context = {
+        app,
+        // Stack is lazily created on first get ie. `props.stack` inside the
+        // functional stack. This allows functional stack to call `setStackProps`
+        // before the stack is created.
+        get stack() {
+          if (stack) return stack;
+          stack = new EmptyStack(app, fn, name);
+          return stack;
+        },
+        setStackProps: createSetStackProps(fn),
+      };
+      const returns = fn(props);
+      if ("then" in returns)
+        return returns.then((data: any) => {
+          exportsCache.set(fn, data);
+        });
+
+      exportsCache.set(fn, returns);
+      return result as any;
+    },
+  };
+
+  return result;
 }

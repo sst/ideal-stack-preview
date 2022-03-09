@@ -7,10 +7,9 @@ import { SessionResolver } from "./resolvers/session";
 import { DebugResolver } from "./resolvers/debug";
 import { createGQLHandler } from "@serverless-stack/node/graphql";
 import { Cognito } from "@serverless-stack/node/cognito";
-import { Config } from "@serverless-stack/node/config";
 import { UploadResolver } from "./resolvers/upload";
 
-const cognito = Cognito.create(Config.COGNITO_USER_POOL_ID);
+const cognito = Cognito.create(process.env.COGNITO_USER_POOL_ID!);
 
 export const handler = createGQLHandler<Context>({
   typeDefs,

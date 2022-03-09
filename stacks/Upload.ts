@@ -1,20 +1,14 @@
-import * as sst from "@serverless-stack/resources";
-import { FunctionalStackProps } from "./Functional";
+import { Context } from "./Functional";
 import { HttpMethods } from "aws-cdk-lib/aws-s3";
-import { Parameter } from "./Parameter";
+import { Bucket } from "@serverless-stack/resources";
 
-export function Upload(props: FunctionalStackProps) {
-  const bucket = new sst.Bucket(props.stack, "bucket");
+export function Upload(props: Context) {
+  const bucket = new Bucket(props.stack, "bucket");
   bucket.s3Bucket.addCorsRule({
     allowedMethods: [HttpMethods.PUT],
     allowedOrigins: ["*"],
     allowedHeaders: ["*"],
   });
 
-  return {
-    bucket,
-    parameters: Parameter.create(props.stack, {
-      UPLOAD_BUCKET: bucket.bucketName,
-    }),
-  };
+  return bucket;
 }
