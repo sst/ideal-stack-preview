@@ -9,9 +9,9 @@ export const DB = new Kysely<Database>({
     mode: "postgres",
     driver: {
       client: new RDSDataService(),
-      database: process.env.RDS_DATABASE!,
-      secretArn: process.env.RDS_SECRET!,
-      resourceArn: process.env.RDS_ARN!,
+      database: process.env.RDS_DATABASE,
+      secretArn: process.env.RDS_SECRET,
+      resourceArn: process.env.RDS_ARN,
     },
   }),
 });
