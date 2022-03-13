@@ -1,9 +1,8 @@
 import * as sst from "@serverless-stack/resources";
-import { Auth } from "./Auth";
+import { Authentication } from "./Authentication";
 import { Database } from "./Database";
 import { Frontend } from "./Frontend";
 import { RemovalPolicy } from "aws-cdk-lib";
-import { IgnoreThisWillBeRemoved } from "./Functional";
 import { GraphQL } from "./Graphql";
 import { Upload } from "./Upload";
 import { Parameter } from "./Parameter";
@@ -19,14 +18,11 @@ export default async function main(app: sst.App) {
   });
   if (app.local) app.setDefaultRemovalPolicy(RemovalPolicy.DESTROY);
 
-  const ignoreThisAppItWillBeRemoved = IgnoreThisWillBeRemoved(app);
-
-  ignoreThisAppItWillBeRemoved
+  app
     .stack(Database)
-    .stack(Auth)
+    .stack(Authentication)
     .stack(Upload)
-    .stack(GraphQL);
-
-  await ignoreThisAppItWillBeRemoved.stack(Frontend);
+    .stack(GraphQL)
+    .stack(Frontend);
   Parameter.codegen();
 }

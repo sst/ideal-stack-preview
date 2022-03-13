@@ -1,7 +1,6 @@
-import { RDS } from "@serverless-stack/resources";
-import { Context } from "./Functional";
+import { RDS, StackContext } from "@serverless-stack/resources";
 
-export function Database(ctx: Context) {
+export function Database(ctx: StackContext) {
   const cluster = new RDS(ctx.stack, "RDS", {
     engine: "postgresql10.14",
     defaultDatabaseName: "starter",

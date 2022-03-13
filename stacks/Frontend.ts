@@ -1,10 +1,9 @@
-import { ViteStaticSite } from "@serverless-stack/resources";
-import { Auth } from "./Auth";
-import { Context, use } from "./Functional";
+import { StackContext, use, ViteStaticSite } from "@serverless-stack/resources";
+import { Authentication } from "./Authentication";
 import { GraphQL } from "./Graphql";
 
-export async function Frontend(props: Context) {
-  const auth = use(Auth);
+export function Frontend(props: StackContext) {
+  const auth = use(Authentication);
   const graphql = use(GraphQL);
   const client = auth.cognitoUserPool!.addClient("frontendClient", {
     userPoolClientName: "frontend",

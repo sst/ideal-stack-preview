@@ -1,8 +1,7 @@
-import * as sst from "@serverless-stack/resources";
-import { Context } from "./Functional";
+import { StackContext, Auth } from "@serverless-stack/resources";
 
-export function Auth(props: Context) {
-  const auth = new sst.Auth(props.stack, "auth2", {
+export function Authentication(props: StackContext) {
+  const auth = new Auth(props.stack, "auth2", {
     cognito: {
       userPool: {
         passwordPolicy: {

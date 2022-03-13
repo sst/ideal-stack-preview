@@ -1,16 +1,17 @@
-import { Context, use } from "./Functional";
 import { Database } from "./Database";
 import { Upload } from "./Upload";
-import { Auth } from "./Auth";
 import {
   ApiPayloadFormatVersion,
   GraphQLApi,
+  StackContext,
+  use,
 } from "@serverless-stack/resources";
+import { Authentication } from "./Authentication";
 
-export function GraphQL(props: Context) {
+export function GraphQL(props: StackContext) {
   const db = use(Database);
   const upload = use(Upload);
-  const auth = use(Auth);
+  const auth = use(Authentication);
 
   const graphql = new GraphQLApi(props.stack, "graphql", {
     server: {
