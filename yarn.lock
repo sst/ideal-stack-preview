@@ -3255,7 +3255,7 @@
     graphql "^16.2.0"
     graphql-helix "^1.11.0"
 
-"@serverless-stack/resources@0.69.0", "@serverless-stack/resources@^0.69.0":
+"@serverless-stack/resources@0.69.0"
   version "0.69.0"
   resolved "https://registry.yarnpkg.com/@serverless-stack/resources/-/resources-0.69.0.tgz#cf377b356ab3ae10517ff8f25a787a011cdea7d8"
   integrity sha512-/SqBnHYI1Ab6H+ke3NjzesIwtt1DE15kDQfrTNunDbviXkyNoLMAtACa70kw4scDT8gmIcuRZOcpJ8/yNaDyWg==
