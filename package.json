@@ -1,0 +1,24 @@
+{
+  "name": "my-sst-app",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "AWS_PROFILE=ironbay-dev sst start",
+    "build": "sst build",
+    "deploy": "sst deploy",
+    "remove": "sst remove",
+    "console": "sst console",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@serverless-stack/cli": "^1.1.1",
+    "@serverless-stack/resources": "^1.1.1",
+    "typescript": "^4.6.4",
+    "@tsconfig/node16": "^1.0.2"
+  },
+  "workspaces": [
+    "backend",
+    "web",
+    "graphql"
+  ]
+}

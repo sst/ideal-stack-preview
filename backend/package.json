@@ -1,0 +1,16 @@
+{
+  "name": "@my-sst-app/backend",
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {},
+  "dependencies": {
+    "@serverless-stack/node": "^1.1.1",
+    "aws-sdk": "^2.1135.0",
+    "kysely": "^0.19.2",
+    "kysely-data-api": "^0.0.9",
+    "ulid": "^2.3.0"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.97"
+  }
+}
