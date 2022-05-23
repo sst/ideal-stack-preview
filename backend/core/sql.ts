@@ -1,5 +1,5 @@
 import { RDSDataService } from "aws-sdk";
-import { Kysely } from "kysely";
+import { Kysely, Selectable } from "kysely";
 import { DataApiDialect } from "kysely-data-api";
 
 export interface Database {}
@@ -15,5 +15,9 @@ export const DB = new Kysely<Database>({
     },
   }),
 });
+
+export type Row = {
+  [Key in keyof Database]: Selectable<Database[Key]>;
+};
 
 export * as SQL from "./sql";

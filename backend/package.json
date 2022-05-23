@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {},
   "dependencies": {
+    "@pothos/core": "^3.11.0",
     "@serverless-stack/node": "^1.1.1",
     "aws-sdk": "^2.1135.0",
     "kysely": "^0.19.2",

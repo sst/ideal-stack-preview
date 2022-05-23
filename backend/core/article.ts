@@ -1,5 +1,5 @@
 import { SQL } from "@my-sst-app/core/sql";
-import { Generated, Selectable } from "kysely";
+import { Generated } from "kysely";
 import { ulid } from "ulid";
 
 export * as Article from "./article";
@@ -12,7 +12,30 @@ declare module "@my-sst-app/core/sql" {
       url: string;
       created: Generated<Date>;
     };
+    comments: {
+      id: string;
+      articleID: string;
+      text: string;
+    };
   }
+}
+
+export async function addComment(articleID: string, text: string) {
+  return await SQL.DB.insertInto("comments")
+    .values({
+      id: ulid(),
+      articleID,
+      text,
+    })
+    .returningAll()
+    .executeTakeFirstOrThrow();
+}
+
+export async function comments(articleID: string) {
+  return await SQL.DB.selectFrom("comments")
+    .selectAll()
+    .where("articleID", "=", articleID)
+    .execute();
 }
 
 export async function create(title: string, url: string) {
@@ -29,12 +52,3 @@ export async function list() {
     .orderBy("created", "desc")
     .execute();
 }
-
-export async function fromID(id: string) {
-  return await SQL.DB.selectFrom("articles")
-    .selectAll()
-    .where("id", "=", id)
-    .executeTakeFirstOrThrow();
-}
-
-export type ArticleRow = Selectable<SQL.Database["articles"]>;

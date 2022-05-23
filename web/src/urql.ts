@@ -34,7 +34,7 @@ export function useTypedMutation<
 
   useEffect(() => {
     if (!mutation) return;
-    execute();
+    execute().then(() => setMutation(undefined));
   }, [mutation]);
 
   return [result, executeWrapper] as const;

@@ -11,10 +11,11 @@
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
-    "@serverless-stack/cli": "^1.1.1",
-    "@serverless-stack/resources": "^1.1.1",
-    "typescript": "^4.6.4",
-    "@tsconfig/node16": "^1.0.2"
+    "@genql/cli": "^2.10.0",
+    "@serverless-stack/cli": "0.0.0-20220523014611",
+    "@serverless-stack/resources": "0.0.0-20220523014611",
+    "@tsconfig/node16": "^1.0.2",
+    "typescript": "^4.6.4"
   },
   "workspaces": [
     "backend",

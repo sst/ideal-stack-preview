@@ -1,5 +1,15 @@
 import { useTypedMutation, useTypedQuery } from "../urql";
 
+interface ArticleForm {
+  title: string;
+  url: string;
+}
+
+interface CommentForm {
+  text: string;
+  articleID: string;
+}
+
 export function List() {
   const [articles] = useTypedQuery({
     query: {
@@ -7,21 +17,33 @@ export function List() {
         id: true,
         title: true,
         url: true,
+        comments: {
+          text: true,
+        },
       },
     },
   });
 
-  const [, createArticle] = useTypedMutation(
-    (opts: { url: string; title: string }) => ({
-      createArticle: [
-        opts,
-        {
-          id: true,
-          url: true,
-        },
-      ],
-    })
-  );
+  const [, createArticle] = useTypedMutation((opts: ArticleForm) => ({
+    createArticle: [
+      opts,
+      {
+        id: true,
+        url: true,
+      },
+    ],
+  }));
+
+  const [, addComment] = useTypedMutation((opts: CommentForm) => ({
+    addComment: [
+      { text: opts.text, articleID: opts.articleID },
+      {
+        id: true,
+        text: true,
+      },
+    ],
+  }));
+
   return (
     <div style={{ padding: "1rem" }}>
       <h2>Articles</h2>
@@ -49,18 +71,28 @@ export function List() {
               <div>
                 {article.title} - <a href={article.url}>{article.url}</a>
               </div>
-              {/*
               <div>
                 <strong>Comments</strong>
+                <ol>
+                  {article.comments.map((comment) => (
+                    <li>{comment.text}</li>
+                  ))}
+                </ol>
               </div>
               <form
-                onSubmit={(e) => {
+                onSubmit={async (e) => {
                   const fd = new FormData(e.currentTarget);
+                  addComment({
+                    text: fd.get("text")!.toString(),
+                    articleID: article.id,
+                  });
+                  e.currentTarget.reset();
+                  e.preventDefault();
                 }}
               >
-                <input name="comment" placeholder="Comment" />
+                <input name="text" placeholder="Comment" />
+                <button type="submit">Submit</button>
               </form>
-              */}
             </div>
           </li>
         ))}
