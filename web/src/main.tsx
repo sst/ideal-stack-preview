@@ -10,18 +10,18 @@ import { List } from "./pages/Article";
 console.log(import.meta.env);
 const cognito = new Cognito({
   UserPoolId: import.meta.env.VITE_COGNITO_USER_POOL_ID,
-  ClientId: import.meta.env.VITE_COGNITO_CLIENT_ID,
+  ClientId: import.meta.env.VITE_COGNITO_CLIENT_ID
 });
 
 const urql = createClient({
-  url: import.meta.env.VITE_API_URL,
+  url: import.meta.env.VITE_GRAPHQL_URL,
   exchanges: defaultExchanges,
   fetchOptions: () => {
     const token = cognito.session?.getAccessToken().getJwtToken();
     return {
-      headers: { authorization: token ? `Bearer ${token}` : "" },
+      headers: { authorization: token ? `Bearer ${token}` : "" }
     };
-  },
+  }
 });
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
