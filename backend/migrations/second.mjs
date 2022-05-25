@@ -6,7 +6,7 @@ import { Kysely } from "kysely";
 export async function up(db) {
   await db.schema
     .createTable("comments")
-    .addColumn("id", "text", (col) => col.primaryKey())
+    .addColumn("id", "text", col => col.primaryKey())
     .addColumn("articleID", "text")
     .addColumn("text", "text")
     .execute();

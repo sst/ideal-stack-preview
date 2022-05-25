@@ -6,10 +6,10 @@ import { Kysely } from "kysely";
 export async function up(db) {
   await db.schema
     .createTable("articles")
-    .addColumn("id", "text", (col) => col.primaryKey())
+    .addColumn("id", "text", col => col.primaryKey())
     .addColumn("title", "text")
     .addColumn("url", "text")
-    .addColumn("created", "timestamp", (col) => col.defaultTo("now()"))
+    .addColumn("created", "timestamp", col => col.defaultTo("now()"))
     .execute();
 
   await db.schema

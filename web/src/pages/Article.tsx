@@ -18,10 +18,10 @@ export function List() {
         title: true,
         url: true,
         comments: {
-          text: true,
-        },
-      },
-    },
+          text: true
+        }
+      }
+    }
   });
 
   const [, createArticle] = useTypedMutation((opts: ArticleForm) => ({
@@ -29,9 +29,9 @@ export function List() {
       opts,
       {
         id: true,
-        url: true,
-      },
-    ],
+        url: true
+      }
+    ]
   }));
 
   const [, addComment] = useTypedMutation((opts: CommentForm) => ({
@@ -39,9 +39,9 @@ export function List() {
       { text: opts.text, articleID: opts.articleID },
       {
         id: true,
-        text: true,
-      },
-    ],
+        text: true
+      }
+    ]
   }));
 
   return (
@@ -49,12 +49,12 @@ export function List() {
       <h2>Articles</h2>
       <h3>Submit</h3>
       <form
-        onSubmit={(e) => {
+        onSubmit={e => {
           e.preventDefault();
           const fd = new FormData(e.currentTarget);
           createArticle({
             url: fd.get("url")!.toString(),
-            title: fd.get("title")!.toString(),
+            title: fd.get("title")!.toString()
           });
           e.currentTarget.reset();
         }}
@@ -65,7 +65,7 @@ export function List() {
       </form>
       <h3>Latest</h3>
       <ol>
-        {articles.data?.articles.map((article) => (
+        {articles.data?.articles.map(article => (
           <li>
             <div>
               <div>
@@ -74,17 +74,17 @@ export function List() {
               <div>
                 <strong>Comments</strong>
                 <ol>
-                  {article.comments.map((comment) => (
+                  {article.comments.map(comment => (
                     <li>{comment.text}</li>
                   ))}
                 </ol>
               </div>
               <form
-                onSubmit={async (e) => {
+                onSubmit={async e => {
                   const fd = new FormData(e.currentTarget);
                   addComment({
                     text: fd.get("text")!.toString(),
-                    articleID: article.id,
+                    articleID: article.id
                   });
                   e.currentTarget.reset();
                   e.preventDefault();

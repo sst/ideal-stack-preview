@@ -4,10 +4,7 @@ export function Database({ stack }: StackContext) {
   const rds = new RDS(stack, "rds", {
     engine: "postgresql10.14",
     migrations: "backend/migrations",
-    defaultDatabaseName: "mysstapp",
-    scaling: {
-      autoPause: false,
-    },
+    defaultDatabaseName: "mysstapp"
   });
 
   return rds;
