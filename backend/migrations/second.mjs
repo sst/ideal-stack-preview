@@ -5,10 +5,10 @@ import { Kysely } from "kysely";
  */
 export async function up(db) {
   await db.schema
-    .createTable("comments")
+    .createTable("comment")
     .addColumn("id", "text", col => col.primaryKey())
-    .addColumn("articleID", "text")
-    .addColumn("text", "text")
+    .addColumn("articleID", "text", col => col.notNull())
+    .addColumn("text", "text", col => col.notNull())
     .execute();
 }
 
@@ -16,5 +16,5 @@ export async function up(db) {
  * @param db {Kysely<any>}
  */
 export async function down(db) {
-  await db.schema.dropTable("comments").execute();
+  await db.schema.dropTable("comment").execute();
 }

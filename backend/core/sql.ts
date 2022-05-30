@@ -1,8 +1,7 @@
 import { RDSDataService } from "aws-sdk";
 import { Kysely, Selectable } from "kysely";
 import { DataApiDialect } from "kysely-data-api";
-
-export interface Database {}
+import type { Database } from "./sql.generated";
 
 export const DB = new Kysely<Database>({
   dialect: new DataApiDialect({

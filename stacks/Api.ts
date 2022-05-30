@@ -23,12 +23,14 @@ export function Api({ stack }: StackContext) {
         type: "pothos",
         function: {
           handler: "functions/graphql/graphql.handler"
-        },
+        }
+        /*
         schema: "backend/functions/graphql/schema.ts",
         output: "graphql/schema.graphql",
         commands: [
           "npx genql --output ./graphql/genql --schema ./graphql/schema.graphql --esm"
         ]
+        */
       }
     }
   });
