@@ -15,7 +15,7 @@ export function Login() {
     const email = fd.get("email") as string;
     await cognito
       .login(email, fd.get("password") as string)
-      .then(() => nav("/todos"))
+      .then(() => nav("/articles"))
       .catch((err) => {
         if (err.name === "UserNotConfirmedException") {
           nav("/auth/confirm?email=" + email);
