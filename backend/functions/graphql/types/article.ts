@@ -4,7 +4,7 @@ import { builder } from "../builder";
 
 const ArticleType = builder.objectRef<SQL.Row["article"]>("Article").implement({
   fields: t => ({
-    id: t.exposeID("id"),
+    id: t.exposeID("articleID"),
     title: t.exposeID("title"),
     url: t.exposeID("url"),
     comments: t.field({
@@ -16,7 +16,7 @@ const ArticleType = builder.objectRef<SQL.Row["article"]>("Article").implement({
 
 const CommentType = builder.objectRef<SQL.Row["comment"]>("Comment").implement({
   fields: t => ({
-    id: t.exposeString("id"),
+    id: t.exposeString("commentID"),
     text: t.exposeString("text")
   })
 });

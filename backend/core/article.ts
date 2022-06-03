@@ -6,7 +6,7 @@ export * as Article from "./article";
 export async function addComment(articleID: string, text: string) {
   return await SQL.DB.insertInto("comment")
     .values({
-      id: ulid(),
+      commentID: ulid(),
       articleID,
       text,
     })

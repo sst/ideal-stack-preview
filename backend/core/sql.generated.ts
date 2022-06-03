@@ -10,7 +10,7 @@ export interface article {
 }
 export interface comment {
   articleID: string;
-  id: string;
+  commentID: string;
   text: string;
 }
 export interface kysely_migration {
