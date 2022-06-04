@@ -16,5 +16,5 @@ export function Web({ stack }: StackContext) {
     SITE_URL: site.url
   });
 
-  return api;
+  return site;
 }
